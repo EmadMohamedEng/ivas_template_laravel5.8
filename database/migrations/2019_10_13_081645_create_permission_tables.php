@@ -77,6 +77,18 @@ class CreatePermissionTables extends Migration
 
             $table->primary(['permission_id', 'role_id']);
         });
+
+        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
+            $table->integer('role_id')->unsigned();
+            $table->morphs('model');
+    
+            $table->foreign('role_id')
+                ->references('id')
+                ->on($tableNames['roles'])
+                ->onDelete('cascade');
+    
+            $table->primary(['role_id', 'model_id', 'model_type']);
+        });
     }
 
     /**
@@ -93,5 +105,6 @@ class CreatePermissionTables extends Migration
         Schema::drop($tableNames['user_has_permissions']);
         Schema::drop($tableNames['roles']);
         Schema::drop($tableNames['permissions']);
+        Schema::drop($tableNames['model_has_roles']);
     }
 }
