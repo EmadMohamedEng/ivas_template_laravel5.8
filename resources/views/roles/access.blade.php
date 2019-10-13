@@ -17,7 +17,7 @@
 				   <div class="table-responsive">
 						<ul>
 							@foreach($controllers as $index=>$item)
-                            <li><h4>{{$index}} <a href="{{url('all_routes/create?controller_name='.$index.'&role='.$role->id)}}"><i class="btn btn-success fa fa-plus" title="Add Route"></i></a></h4></li> 
+                            <li><h4>{{$index}} <a href="{{url('/routes/create')}}"><i class="btn btn-success fa fa-plus" title="Add Route"></i></a></h4></li> 
                                 <ul>
                                    @foreach($methods as $method)
                                      @if($method->controller_name==$index)

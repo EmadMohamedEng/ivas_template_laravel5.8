@@ -331,10 +331,10 @@ class RoutesTableSeeder extends Seeder
             array (
                 'id' => 40,
                 'method' => 'get',
-                'route' => 'routes',
+                'route' => 'all_routes',
                 'controller_name' => 'RouteController',
                 'created_at' => '2018-02-05 13:39:21',
-                'updated_at' => '2018-02-05 13:39:21',
+                'updated_at' => '2019-10-13 11:51:33',
                 'function_name' => 'index',
             ),
             32 => 
@@ -1146,6 +1146,26 @@ class RoutesTableSeeder extends Seeder
                 'created_at' => '2019-03-14 08:51:15',
                 'updated_at' => '2019-03-14 08:51:15',
                 'function_name' => 'destroy',
+            ),
+            113 => 
+            array (
+                'id' => 162,
+                'method' => 'get',
+                'route' => 'users/{id}/delete',
+                'controller_name' => 'UserController',
+                'created_at' => '2019-10-13 11:51:03',
+                'updated_at' => '2019-10-13 11:51:03',
+                'function_name' => 'destroy',
+            ),
+            114 => 
+            array (
+                'id' => 163,
+                'method' => 'get',
+                'route' => 'migrate_tables',
+                'controller_name' => 'DashboardController',
+                'created_at' => '2019-10-13 12:09:15',
+                'updated_at' => '2019-10-13 13:02:42',
+                'function_name' => 'migrate_tables',
             ),
         ));
         

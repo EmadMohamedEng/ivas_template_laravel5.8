@@ -285,7 +285,7 @@ class DashboardController extends Controller
         // get all routes that has index
         // return this route controller name
         $delete_alls = DeleteAll::all() ;
-        $routes  = RouteModel::where('function_name','LIKE','%index%')->groupBy("controller_name")->get() ;
+        $routes  = RouteModel::where('function_name','LIKE','%index%')->get() ;
         return view('delete_all_flags.index',compact('delete_alls','routes')) ;
     }
 
@@ -332,11 +332,22 @@ public function seed_manager() {
     }
     public function seed_tables(Request $request) {
 
+        $whitelist = array(
+            '127.0.0.1',
+            '::1'
+        );
+        
         $tables = $request->tables;
         if($tables){
             ini_set('max_execution_time', 300);
             foreach ($tables as $table) {
-                $command = "E:/php7.2/xampp/php/php.exe  artisan iseed $table --force";
+
+                if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+                    $command = "E:/php7.2/xampp/php/php.exe  artisan iseed $table --force";
+                }
+                else{
+                    $command = "php7 artisan iseed $table --force";
+                }
                 $ex = exec($command);
                 if(empty($ex)){
                     \Session::flash('failed', 'Please Add orangehill/iseed Package First');
@@ -360,11 +371,15 @@ public function seed_manager() {
     }
     public function migrate_tables(Request $request)
     {
+        $whitelist = array(
+            '127.0.0.1',
+            '::1'
+        );
 
         $tables = $request->tables;
         if($tables)
         {
-          $dir = new DirectoryIterator(base_path('database/migrations/'));
+          $dir = new \DirectoryIterator(base_path('database/migrations/'));
           foreach ($dir as $fileinfo) {
            if (!$fileinfo->isDot() && strpos($fileinfo->getFilename(),'create_permission_tables') == false) {
                unlink(base_path('database/migrations/'.$fileinfo->getFilename()));
@@ -372,7 +387,12 @@ public function seed_manager() {
           }
           $table_migrate=implode(',',$tables);
           //return $table_migrate;
-          $command = "E:/php7.2/xampp/php/php.exe artisan migrate:generate $table_migrate -n";
+            if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+                $command = "E:/php7.2/xampp/php/php.exe artisan migrate:generate $table_migrate -n";
+            }
+            else{
+                $command = "php7 artisan migrate:generate $table_migrate -n";
+            }
           $ex = exec($command);
           \Session::flash('success', 'Created a Migrate file from tables successfully');
           return redirect('dashboard');

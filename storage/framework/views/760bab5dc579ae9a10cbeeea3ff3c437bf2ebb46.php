@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <link rel="stylesheet" href="{{url('css/cropper.min.css')}}">
+        <link rel="stylesheet" href="<?php echo e(url('css/cropper.min.css')); ?>">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <style>
             #resizable { width: 150px; height: 150px; padding: 0.5em; }
@@ -16,47 +16,47 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!--page specific css styles-->
-        <link rel="stylesheet" type="text/css" href="{{url('assets/chosen-bootstrap/chosen.min.css')}}" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/chosen-bootstrap/chosen.min.css')); ?>" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="{{url('assets/jquery-tags-input/jquery.tagsinput.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/jquery-pwstrength/jquery.pwstrength.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-fileupload/bootstrap-fileupload.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/dropzone/downloads/css/dropzone.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-colorpicker/css/colorpicker.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-timepicker/compiled/timepicker.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/clockface/css/clockface.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-datepicker/css/datepicker.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-daterangepicker/daterangepicker.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-switch/static/stylesheets/bootstrap-switch.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{url('assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/jquery-tags-input/jquery.tagsinput.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/jquery-pwstrength/jquery.pwstrength.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-fileupload/bootstrap-fileupload.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/dropzone/downloads/css/dropzone.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-colorpicker/css/colorpicker.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-timepicker/compiled/timepicker.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/clockface/css/clockface.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-datepicker/css/datepicker.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-daterangepicker/daterangepicker.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-switch/static/stylesheets/bootstrap-switch.css')); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css')); ?>" />
 
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
-        <link rel="stylesheet" href="{{url('assets/data-tables/bootstrap3/dataTables.bootstrap.css')}}" />
+        <link rel="stylesheet" href="<?php echo e(url('assets/data-tables/bootstrap3/dataTables.bootstrap.css')); ?>" />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
 
 
         <!--base css styles-->
-        <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{url('assets/font-awesome/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="<?php echo e(url('assets/bootstrap/css/bootstrap.min.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(url('assets/font-awesome/css/font-awesome.min.css')); ?>">
         <!--page specific css styles-->
 
         <!--flaty css styles-->
-        <link rel="stylesheet" href="{{url('css/flaty.css')}}">
-        <link rel="stylesheet" href="{{url('css/flaty-responsive.css')}}">
+        <link rel="stylesheet" href="<?php echo e(url('css/flaty.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(url('css/flaty-responsive.css')); ?>">
 
-        {{-- {{dd(App::getLocale())}} --}}
-        @if(App::getLocale() == 'ar')
-        <link rel="stylesheet" type="text/css" href="{{url('css/rtl.css')}}">
-        <link href="{{url('https://fonts.googleapis.com/css?family=Cairo:600')}}" rel="stylesheet">
-        @endif
+        
+        <?php if(App::getLocale() == 'ar'): ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo e(url('css/rtl.css')); ?>">
+        <link href="<?php echo e(url('https://fonts.googleapis.com/css?family=Cairo:600')); ?>" rel="stylesheet">
+        <?php endif; ?>
 
-        <link rel="shortcut icon" href="{{url('img/favicon.png')}}">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="shortcut icon" href="<?php echo e(url('img/favicon.png')); ?>">
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
         <script>
 $.ajaxSetup({
@@ -134,10 +134,10 @@ function ConfirmDelete()
             <button type="button" class="navbar-toggle navbar-btn collapsed" data-toggle="collapse" data-target="#sidebar">
                 <span class="fa fa-bars"></span>
             </button>
-            <a class="navbar-brand" href="{{url('/dashboard')}}">
+            <a class="navbar-brand" href="<?php echo e(url('/dashboard')); ?>">
                 <small>
                     <i class="fa fa-user-secret"></i>
-                    @lang('messages.dashboard')
+                    <?php echo app('translator')->getFromJson('messages.dashboard'); ?>
                 </small>
             </a>
 
@@ -168,7 +168,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                 <li class="user-profile">
                     <a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
                         <span class="hhh" id="user_info">
-                            {!! Auth::user()->name !!}
+                            <?php echo Auth::user()->name; ?>
+
                         </span>
                         <i class="fa fa-caret-down"></i>
                     </a>
@@ -176,9 +177,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     <!-- BEGIN User Dropdown -->
                     <ul class="dropdown-menu dropdown-navbar" id="user_menu">
                         <li>
-                            <a href="{{url('user_profile')}}">
+                            <a href="<?php echo e(url('user_profile')); ?>">
                                 <i class="fa fa-user"></i>
-                                @lang('messages.profile')
+                                <?php echo app('translator')->getFromJson('messages.profile'); ?>
                             </a>
                         </li>
 
@@ -187,12 +188,13 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         <li class="divider"></li>
 
                         <li>
-                            <a href="{{url('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            <a href="<?php echo e(url('logout')); ?>" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                 <i class="fa fa-off"></i>
-                                @lang('messages.logout')
+                                <?php echo app('translator')->getFromJson('messages.logout'); ?>
                             </a>
-                            <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
+                            <form id="frm-logout" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                <?php echo e(csrf_field()); ?>
+
                             </form>
                         </li>
                     </ul>
@@ -213,14 +215,14 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     <li id="user">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>@lang('messages.users.users')</span>
+                            <span><?php echo app('translator')->getFromJson('messages.users.users'); ?></span>
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <li id="user-create"><a href="{{url('users/new')}}">@lang('messages.users.add_user')</a></li>
-                            <li id="user-index"><a href="{{url('users')}}">@lang('messages.users.users')</a></li>
+                            <li id="user-create"><a href="<?php echo e(url('users/new')); ?>"><?php echo app('translator')->getFromJson('messages.users.add_user'); ?></a></li>
+                            <li id="user-index"><a href="<?php echo e(url('users')); ?>"><?php echo app('translator')->getFromJson('messages.users.users'); ?></a></li>
                         </ul>
                         <!-- END Submenu -->
                     </li>
@@ -228,16 +230,16 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     <li id="role">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-road"></i>
-                            <span>@lang('messages.role')</span>
+                            <span><?php echo app('translator')->getFromJson('messages.role'); ?></span>
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <li id="role-create"><a href="{{url('roles/new')}}">@lang('messages.create-role')</a></li>
-                            <li id="role-index"><a href="{{url('roles')}}">@lang('messages.role')</a></li>
-                            <li id="route-index"><a href="{{url('all_routes')}}">Routes</a></li>
-                            <li id="route-v2-index"><a href="{{url('routes/index_v2')}}">Routes V2</a></li>
+                            <li id="role-create"><a href="<?php echo e(url('roles/new')); ?>"><?php echo app('translator')->getFromJson('messages.create-role'); ?></a></li>
+                            <li id="role-index"><a href="<?php echo e(url('roles')); ?>"><?php echo app('translator')->getFromJson('messages.role'); ?></a></li>
+                            <li id="route-index"><a href="<?php echo e(url('all_routes')); ?>">Routes</a></li>
+                            <li id="route-v2-index"><a href="<?php echo e(url('routes/index_v2')); ?>">Routes V2</a></li>
 
                         </ul>
                         <!-- END Submenu -->
@@ -252,12 +254,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <li id="setting-create"><a href="{{url('setting/new')}}">Add Settings</a></li>
-                            <li id="setting-index"><a href="{{url('setting')}}">Settings</a></li>
-                            <li id="setting-import-DB"><a href="{{url('database_backups')}}">Database Backups</a></li>
-                            <li id="setting-index"><a href="{{url('clear-cache')}}">Clear Cashe</a></li>
-                            <li id="setting-seed"><a href="{{url('admin/seed_manager')}}">Create Seed Files</a></li>
-                            <li id="setting-migrate"><a href="{{url('admin/migrate_manager')}}">Create Migrate Files</a></li>
+                            <li id="setting-create"><a href="<?php echo e(url('setting/new')); ?>">Add Settings</a></li>
+                            <li id="setting-index"><a href="<?php echo e(url('setting')); ?>">Settings</a></li>
+                            <li id="setting-import-DB"><a href="<?php echo e(url('database_backups')); ?>">Database Backups</a></li>
+                            <li id="setting-index"><a href="<?php echo e(url('clear-cache')); ?>">Clear Cashe</a></li>
+                            <li id="setting-seed"><a href="<?php echo e(url('admin/seed_manager')); ?>">Create Seed Files</a></li>
+                            <li id="setting-migrate"><a href="<?php echo e(url('admin/migrate_manager')); ?>">Create Migrate Files</a></li>
                         </ul>
                         <!-- END Submenu -->
                     </li>
@@ -270,8 +272,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
                             <ul class="submenu">
-                                <li id="type-create"><a href="{{url('types/create')}}">Add Type</a></li>
-                                <li id="type-index"><a href="{{url('types/index')}}">List Types</a></li>
+                                <li id="type-create"><a href="<?php echo e(url('types/create')); ?>">Add Type</a></li>
+                                <li id="type-index"><a href="<?php echo e(url('types/index')); ?>">List Types</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -284,9 +286,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <!--<li id="elfinder"><a href="{{url('file_manager')}}">UI File Manager</a></li>-->
-                            <li id="file_elfinder"><a href="{{url('admin/elfinder')}}">UI File Manager</a></li>
-                            <li id="uploader"><a href="{{url('upload_items')}}">file uploader</a></li>
+                            <!--<li id="elfinder"><a href="<?php echo e(url('file_manager')); ?>">UI File Manager</a></li>-->
+                            <li id="file_elfinder"><a href="<?php echo e(url('admin/elfinder')); ?>">UI File Manager</a></li>
+                            <li id="uploader"><a href="<?php echo e(url('upload_items')); ?>">file uploader</a></li>
                         </ul>
                         <!-- END Submenu -->
                     </li>
@@ -300,8 +302,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <li id="upload_resize"><a href="{{url('upload_resize')}}">Upload/Resize Image</a></li>
-                            <li id="upload_resize_v2"><a href="{{url('upload_resize_v2')}}">Upload/Resize Image V2</a></li>
+                            <li id="upload_resize"><a href="<?php echo e(url('upload_resize')); ?>">Upload/Resize Image</a></li>
+                            <li id="upload_resize_v2"><a href="<?php echo e(url('upload_resize_v2')); ?>">Upload/Resize Image V2</a></li>
                         </ul>
                         <!-- END Submenu -->
                     </li>
@@ -315,8 +317,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="static-create"><a href="{{url('static_translation/create')}}">Add Static Translation</a></li>
-                                <li id="static-index"><a href="{{url('static_translation')}}">Static Translations</a></li>
+                                <li id="static-create"><a href="<?php echo e(url('static_translation/create')); ?>">Add Static Translation</a></li>
+                                <li id="static-index"><a href="<?php echo e(url('static_translation')); ?>">Static Translations</a></li>
                             </ul>
                             <!-- END Submenu -->
                         </li>
@@ -332,8 +334,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="language-create"><a href="{{url('language/create')}}">Add Language</a></li>
-                                <li id="language-index"><a href="{{url('language')}}">Languages</a></li>
+                                <li id="language-create"><a href="<?php echo e(url('language/create')); ?>">Add Language</a></li>
+                                <li id="language-index"><a href="<?php echo e(url('language')); ?>">Languages</a></li>
                             </ul>
                             <!-- END Submenu -->
                         </li>
@@ -349,7 +351,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="delete-all-index"><a href="{{url('delete_all')}}">All flags</a></li>
+                                <li id="delete-all-index"><a href="<?php echo e(url('delete_all')); ?>">All flags</a></li>
                             </ul>
                             <!-- END Submenu -->
                         </li>
@@ -365,8 +367,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="country_index"><a href="{{url('country')}}">List Country</a></li>
-                                <li id="country_create"><a href="{{url('country/create')}}">Create Country</a></li>
+                                <li id="country_index"><a href="<?php echo e(url('country')); ?>">List Country</a></li>
+                                <li id="country_create"><a href="<?php echo e(url('country/create')); ?>">Create Country</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -381,8 +383,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="operator_index"><a href="{{url('operator')}}">List operator</a></li>
-                                <li id="operator_create"><a href="{{url('operator/create')}}">Create Operator</a></li>
+                                <li id="operator_index"><a href="<?php echo e(url('operator')); ?>">List operator</a></li>
+                                <li id="operator_create"><a href="<?php echo e(url('operator/create')); ?>">Create Operator</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -397,8 +399,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="category_index"><a href="{{url('category')}}">List category</a></li>
-                                <li id="category_create"><a href="{{url('category/create')}}">Create Category</a></li>
+                                <li id="category_index"><a href="<?php echo e(url('category')); ?>">List category</a></li>
+                                <li id="category_create"><a href="<?php echo e(url('category/create')); ?>">Create Category</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -413,14 +415,14 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
 
                             <ul class="submenu">
-                                <li id="sub_category_index"><a href="{{url('sub_category')}}">List Sub category</a></li>
-                                <li id="sub_category_create"><a href="{{url('sub_category/create')}}">Create Sub Category</a></li>
+                                <li id="sub_category_index"><a href="<?php echo e(url('sub_category')); ?>">List Sub category</a></li>
+                                <li id="sub_category_create"><a href="<?php echo e(url('sub_category/create')); ?>">Create Sub Category</a></li>
                             </ul>
                         </li>
                     </ul> -->
 
                     <?php $content_type_flag = DB::table('settings')->where('key','like','%content_type_flag%')->first(); ?>
-                    @if($content_type_flag->value)
+                    <?php if($content_type_flag->value): ?>
                     <ul class="nav nav-list">
                         <li id="content_types">
                             <a href="#" class="dropdown-toggle">
@@ -431,12 +433,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="content_types_index"><a href="{{url('content_type')}}">List Content Type</a></li>
-                                <li id="content_types_create"><a href="{{url('content_type/create')}}">Create Content Type</a></li>
+                                <li id="content_types_index"><a href="<?php echo e(url('content_type')); ?>">List Content Type</a></li>
+                                <li id="content_types_create"><a href="<?php echo e(url('content_type/create')); ?>">Create Content Type</a></li>
                             </ul>
                         </li>
                     </ul>
-                    @endif
+                    <?php endif; ?>
 
                     <ul class="nav nav-list">
                         <li id="contents">
@@ -448,8 +450,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="contents_index"><a href="{{url('content')}}">List Content </a></li>
-                                <li id="contents_create"><a href="{{url('content/create')}}">Create Content</a></li>
+                                <li id="contents_index"><a href="<?php echo e(url('content')); ?>">List Content </a></li>
+                                <li id="contents_create"><a href="<?php echo e(url('content/create')); ?>">Create Content</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -465,12 +467,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="post_index"><a href="{{url('post')}}">List Post </a></li>
-                                <li id="post_create"><a href="{{url('post/create')}}">Create Post</a></li>
+                                <li id="post_index"><a href="<?php echo e(url('post')); ?>">List Post </a></li>
+                                <li id="post_create"><a href="<?php echo e(url('post/create')); ?>">Create Post</a></li>
                             </ul>
                         </li>
                     </ul>
-                    {{--@endif--}}
+                    
                 </ul>
                 <!-- END Navlist -->
 
@@ -487,7 +489,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                 <!-- BEGIN Page Title -->
                 <div class="page-title">
                     <div>
-                        <h1><i class="fa fa-file-o"></i> @yield('page_title')</h1>
+                        <h1><i class="fa fa-file-o"></i> <?php echo $__env->yieldContent('page_title'); ?></h1>
                     </div>
                 </div>
                 <!-- END Page Title -->
@@ -495,16 +497,16 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                 <!-- BEGIN Breadcrumb -->
                 <div id="breadcrumbs">
                     <ul class="breadcrumb">
-                        <li class="active"><i class="fa fa-home"></i> @lang('messages.home')/ @yield('page_title') </li>
+                        <li class="active"><i class="fa fa-home"></i> <?php echo app('translator')->getFromJson('messages.home'); ?>/ <?php echo $__env->yieldContent('page_title'); ?> </li>
                     </ul>
                 </div>
                 <!-- END Breadcrumb -->
 
-                @include('partial.flash')
-                @yield('content')
+                <?php echo $__env->make('partial.flash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php echo $__env->yieldContent('content'); ?>
             </div>
             <div class="footer" align="center" style=" position: absolute; width: 100%; bottom: 0;">
-                <p>{{\Carbon\Carbon::now()->year}} © iVAS Template</p>
+                <p><?php echo e(\Carbon\Carbon::now()->year); ?> © iVAS Template</p>
             </div>
             <a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>
         </div>
@@ -514,45 +516,45 @@ if (Config::get('languages')[App::getLocale()] == "English") {
         <!--basic scripts-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="assets/jquery/jquery-2.1.4.min.js"><\/script>')</script>
-        <script src="{{url('assets/jquery-cookie/jquery.cookie.js')}}"></script>
-        <script src="{{url('assets/bootstrap/js/bootstrap.min.js')}}"></script>
-        <script src="{{url('assets/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-        <script src="{{url('js/flaty.js')}}"></script>
+        <script src="<?php echo e(url('assets/jquery-cookie/jquery.cookie.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/bootstrap/js/bootstrap.min.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/jquery-slimscroll/jquery.slimscroll.min.js')); ?>"></script>
+        <script src="<?php echo e(url('js/flaty.js')); ?>"></script>
         <?php
         $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
         if (strpos($url, 'elfinder') === false) {
             ?>
             <!--page specific plugin scripts-->
-            <script src="{{url('assets/flot/jquery.flot.js')}}"></script>
-            <script src="{{url('assets/flot/jquery.flot.resize.js')}}"></script>
-            <script src="{{url('assets/flot/jquery.flot.pie.js')}}"></script>
-            <script src="{{url('assets/flot/jquery.flot.stack.js')}}"></script>
-            <script src="{{url('assets/flot/jquery.flot.crosshair.js')}}"></script>
-            {{--<script src="{{url('assets/flot/jquery.flot.tooltip.min.js')}}"></script>--}}
-        <script src="{{url('assets/sparkline/jquery.sparkline.min.js')}}"></script>
+            <script src="<?php echo e(url('assets/flot/jquery.flot.js')); ?>"></script>
+            <script src="<?php echo e(url('assets/flot/jquery.flot.resize.js')); ?>"></script>
+            <script src="<?php echo e(url('assets/flot/jquery.flot.pie.js')); ?>"></script>
+            <script src="<?php echo e(url('assets/flot/jquery.flot.stack.js')); ?>"></script>
+            <script src="<?php echo e(url('assets/flot/jquery.flot.crosshair.js')); ?>"></script>
+            
+        <script src="<?php echo e(url('assets/sparkline/jquery.sparkline.min.js')); ?>"></script>
 
 
-        <script type="text/javascript" src="{{url('assets/chosen-bootstrap/chosen.jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-inputmask/bootstrap-inputmask.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/jquery-tags-input/jquery.tagsinput.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/jquery-pwstrength/jquery.pwstrength.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/dropzone/downloads/dropzone.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/clockface/js/clockface.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-daterangepicker/date.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-switch/static/js/bootstrap-switch.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/ckeditor/ckeditor.js')}}"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/chosen-bootstrap/chosen.jquery.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-inputmask/bootstrap-inputmask.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/jquery-tags-input/jquery.tagsinput.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/jquery-pwstrength/jquery.pwstrength.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-fileupload/bootstrap-fileupload.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/dropzone/downloads/dropzone.min.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-timepicker/js/bootstrap-timepicker.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/clockface/js/clockface.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-daterangepicker/date.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-daterangepicker/daterangepicker.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-switch/static/js/bootstrap-switch.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js')); ?>"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets/ckeditor/ckeditor.js')); ?>"></script>
 
 
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="{{url('assets_/data-tables/bootstrap3/dataTables.bootstrap.js')}}"></script>
+        <script type="text/javascript" src="<?php echo e(url('assets_/data-tables/bootstrap3/dataTables.bootstrap.js')); ?>"></script>
 
 
         <!--flaty scripts-->
@@ -617,7 +619,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                 if (!check)
                 {
                     $('.select_all_template').prop("checked", !check);
-                    $.get("{{url('get_table_ids?table_name=')}}" + table_name, function (data, status) {
+                    $.get("<?php echo e(url('get_table_ids?table_name=')); ?>" + table_name, function (data, status) {
                         data.forEach(function (item) {
                             collect_selected(item.id);
                         });
@@ -686,11 +688,11 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     var tb_name = document.createElement("input");
                     var csrf = document.createElement("input");
                     csrf.name = "_token";
-                    csrf.value = "{{ csrf_token() }}";
+                    csrf.value = "<?php echo e(csrf_token()); ?>";
                     csrf.type = "hidden";
 
                     form.method = "POST";
-                    form.action = "{{url('delete_multiselect')}}";
+                    form.action = "<?php echo e(url('delete_multiselect')); ?>";
 
                     element.value = selected_list;
                     element.name = "selected_list";
@@ -723,7 +725,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                 });
             });
         </script>
-        <script src="{{url('js/cropper.min.js')}}" defer></script>
+        <script src="<?php echo e(url('js/cropper.min.js')); ?>" defer></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $(function () {
@@ -741,9 +743,10 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
             } catch(er) {console.log(er);}
         </script>
-        <script src="{{url('js/flaty-demo-codes.js')}}"></script>
+        <script src="<?php echo e(url('js/flaty-demo-codes.js')); ?>"></script>
     <?php } ?>
-    @yield('script')
+    <?php echo $__env->yieldContent('script'); ?>
 
 </body>
 </html>
+<?php /**PATH D:\xampp7.3\htdocs\ivas_template_laravel5.8\resources\views/template.blade.php ENDPATH**/ ?>

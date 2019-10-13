@@ -1,10 +1,10 @@
  
- @extends('template')
-@section('page_title')
+ 
+<?php $__env->startSection('page_title'); ?>
     Upload And Resize
-@stop
-@section('content')
-    @include('errors')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
 
     <div class="row">
@@ -27,7 +27,7 @@
                     <input id="inpHeight" placeholder="Height" style="display:none;">
                     <br><br>
                     <div class="form-group" style="display: none;" id="save_btn"> 
-                        <input type="submit" class="btn btn-primary" value="@lang('messages.save')" onclick="save_image()">
+                        <input type="submit" class="btn btn-primary" value="<?php echo app('translator')->getFromJson('messages.save'); ?>" onclick="save_image()">
                         </div>
                     </div>
                 </div>
@@ -36,9 +36,9 @@
 
     </div>
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
    <script>
     var width = "250px" ; 
     var height = "300px" ; 
@@ -147,7 +147,7 @@
         $('#images').addClass('active');
         $('#upload_resize').addClass('active');
     </script>
-@stop 
+<?php $__env->stopSection(); ?> 
 
 
 
@@ -170,3 +170,5 @@
 
 
 
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp7.3\htdocs\ivas_template_laravel5.8\resources\views/dashboard/upload_resize.blade.php ENDPATH**/ ?>
