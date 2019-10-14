@@ -343,7 +343,7 @@ public function seed_manager() {
             foreach ($tables as $table) {
 
                 if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-                    $command = "E:/php7.2/xampp/php/php.exe  artisan iseed $table --force";
+                    $command = "php artisan iseed $table --force";
                 }
                 else{
                     $command = "php7 artisan iseed $table --force";
@@ -380,15 +380,15 @@ public function seed_manager() {
         if($tables)
         {
           $dir = new \DirectoryIterator(base_path('database/migrations/'));
-          foreach ($dir as $fileinfo) {
-           if (!$fileinfo->isDot() && strpos($fileinfo->getFilename(),'create_permission_tables') == false) {
-               unlink(base_path('database/migrations/'.$fileinfo->getFilename()));
-           }
-          }
+        //   foreach ($dir as $fileinfo) {
+        //    if (!$fileinfo->isDot() && strpos($fileinfo->getFilename(),'create_permission_tables') == false) {
+        //        unlink(base_path('database/migrations/'.$fileinfo->getFilename()));
+        //    }
+        //   }
           $table_migrate=implode(',',$tables);
           //return $table_migrate;
             if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-                $command = "E:/php7.2/xampp/php/php.exe artisan migrate:generate $table_migrate -n";
+                $command = "php artisan migrate:generate $table_migrate -n";
             }
             else{
                 $command = "php7 artisan migrate:generate $table_migrate -n";
