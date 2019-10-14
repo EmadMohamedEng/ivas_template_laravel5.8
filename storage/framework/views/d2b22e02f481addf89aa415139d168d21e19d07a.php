@@ -1,9 +1,8 @@
-@extends('template')
-@section('page_title')
+<?php $__env->startSection('page_title'); ?>
     Uploader
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="row">
         <div class="col-md-12">
@@ -17,7 +16,8 @@
                 </div>
                 <div class="box-content">
                     <form name="form_id" id="form_id" class="form-horizontal" action="javascript:void(0);" enctype="multipart/form-data" >
-                      {{ csrf_field() }}
+                      <?php echo e(csrf_field()); ?>
+
                         <div class="col-md-12">
                             <fieldset><legend> Items </legend>
 
@@ -47,12 +47,12 @@
                             <label class="col-sm-5 text-right">&nbsp;</label>
                             <div class="col-sm-6">
                                 <button type="submit" name="submit" class="btn btn-success btn-sm" ><i class="fa  fa-save "></i> Save</button>
-                                <button type="button" onclick="location.href='{{url('upload_items')}}' " class="btn btn-danger btn-sm "><i class="fa  fa-arrow-circle-left "></i>Cancel</button>
+                                <button type="button" onclick="location.href='<?php echo e(url('upload_items')); ?>' " class="btn btn-danger btn-sm "><i class="fa  fa-arrow-circle-left "></i>Cancel</button>
                             </div>
 
                         </div>
                     </form>
-                    {{-- {!! Form::close() !!} --}}
+                    
                     <center>
 
                         <table class="table table-striped table-bordered" style="width:60%;" id="add_files">
@@ -96,9 +96,9 @@
             </div>
         </div>
     </div>
-@stop
-@section('script')
-    <script type="text/javascript" src="{{url('js/vpb_uploader.js')}}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="<?php echo e(url('js/vpb_uploader.js')); ?>"></script>
     <script type='text/javascript'>
     $.ajaxSetup({
     headers: {
@@ -112,7 +112,7 @@
             ({
                 vpb_form_id: "form_id", // Form ID
                 autoSubmit: true,
-                vpb_server_url: "{{url('save_items')}}"
+                vpb_server_url: "<?php echo e(url('save_items')); ?>"
             });
         });
     </script>
@@ -131,4 +131,6 @@
         $('#file_manager').addClass('active');
         $('#uploader').addClass('active');
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp7.3\htdocs\ivas_template_laravel5.8\resources\views/dashboard/multi_uploader.blade.php ENDPATH**/ ?>

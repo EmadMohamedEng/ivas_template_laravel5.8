@@ -24,8 +24,9 @@ class StaticTranslation extends Model
     		$language = Language::where('short_code',\App::getLocale())->first();
     	}else{
     		$language = Language::where('short_code',$locale)->first();
-    	}
-    	return $this->translations()->where('language_id',$language->id)->first()->body;
+        }
+        // return($language['id']);
+    	return $this->translations()->where('language_id',$language['id'])->first()['body'];
     }
 
     public static function getBodyByKeyWord($key_word,$locale='')

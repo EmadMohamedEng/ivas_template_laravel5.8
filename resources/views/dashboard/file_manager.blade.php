@@ -31,6 +31,13 @@
 
 
 @section('script')
+<script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
     <script>
         $('#file_manager').addClass('active');
         $('#elfinder').addClass('active');
