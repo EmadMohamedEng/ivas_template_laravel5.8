@@ -67,7 +67,7 @@ Route::get('/test','DashboardController@test');
         Route::get('routes/index_v2','RouteController@index_v2') ;
         Route::get('get_controller_methods','RouteController@get_methods_for_selected_controller') ;
         Route::post('routes/store_v2','RouteController@store_v2') ;
-
+        Route::get('JIC/index', 'HomeController@JICindex');
 
         Route::get('ldap','DashboardController@ldap') ;
         Route::get('export_DB','DashboardController@export_DB_backup') ;
