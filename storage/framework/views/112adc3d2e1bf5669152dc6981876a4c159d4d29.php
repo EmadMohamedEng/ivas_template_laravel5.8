@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=800">
 <title>J I C - a Javascript Image Compressor</title>
 <!-- JQUERY UI DEPENDENCIES FOR SLIDER -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="https://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all"/>
 <!-- BOOTSTRAP CSS STYLES FOR GOOD LOOKING -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -116,4 +116,4 @@
 
 </script>
 
-</html>
+</html><?php /**PATH D:\xampp7.3\htdocs\ivas_template_laravel5.8\resources\views/JIC/index.blade.php ENDPATH**/ ?>
