@@ -44,10 +44,7 @@ class OperatorController extends Controller
     {
       $validator = Validator::make($request->all(), [
                   'name' => 'required|string|unique:operators,name,null,id,country_id,'.$request->country_id,
-                  'rbt_sms_code' => 'required',
-                  'rbt_ussd_code' => '',
-                  'country_id' => 'required',
-                  'image' => 'required'
+                  'country_id' => 'required'
           ]);
 
       if ($validator->fails()) {
@@ -96,10 +93,7 @@ class OperatorController extends Controller
       //dd($request->all());
       $validator = Validator::make($request->all(), [
                   'name' => 'required|string|unique:operators,name,'.$id.',id,country_id,'.$request->country_id,
-                  'rbt_sms_code' => 'required',
-                  'rbt_ussd_code' => '',
-                  'country_id' => 'required',
-                  'image' => ''
+                  'country_id' => 'required'
           ]);
 
       if ($validator->fails()) {

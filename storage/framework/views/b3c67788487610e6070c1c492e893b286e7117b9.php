@@ -13,9 +13,7 @@ View Content
             </div>
         </div>
     </div>
-
 </div>
-
 
 <?php $__env->stopSection(); ?>
 
@@ -23,6 +21,7 @@ View Content
 <script data-main="./main.default.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.min.js"></script>
 
 <script>
+    console.log($('meta[name="token"]').attr('content'))
     define('elFinderConfig', {
         // elFinder options (REQUIRED)
         // Documentation for client options:
@@ -30,11 +29,11 @@ View Content
         defaultOpts: {
             url: '<?php echo e(url("admin/elfinder")); ?>' ,// connector URL (REQUIRED)
             customHeaders : {
-                  'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             customData: {
-                  '_token': $('meta[name="token"]').attr('content')
-                }
+                '_token': $('meta[name="csrf-token"]').attr('content')
+            }
             , commandsOptions: {
                 edit: {
                     extraOptions: {

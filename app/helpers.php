@@ -78,7 +78,7 @@ Route::get('/test','DashboardController@test');
         Route::get('/clear-cache','DashboardController@clear_cache' );
         Route::get('admin/elfinder', 'ElfinderController@getIndex');
         Route::post('admin/elfinder', 'ElfinderController@getIndex');
-         Route::get('admin/seed_manager', 'DashboardController@seed_manager');
+        Route::get('admin/seed_manager', 'DashboardController@seed_manager');
         Route::post('admin/seed_tables', 'DashboardController@seed_tables');
         Route::get('admin/migrate_manager', 'DashboardController@migrate_manager');
         Route::post('admin/migrate_tables', 'DashboardController@migrate_tables');
