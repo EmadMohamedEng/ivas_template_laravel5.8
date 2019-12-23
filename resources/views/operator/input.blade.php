@@ -13,7 +13,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">Sms Code <span class="text-danger">*</span></label>
+    <label class="col-sm-3 col-lg-2 control-label">Sms Code </label>
     <div class="col-sm-9 col-lg-10 controls">
         {!! Form::number('rbt_sms_code',null,['placeholder'=>'Sms Code','class'=>'form-control','min'=>0]) !!}
     </div>
@@ -36,7 +36,7 @@
 @endif
 
 <div class="form-group">
-    <label class="col-sm-3 col-md-2 control-label">Image <span class="text-danger">*</span></label>
+    <label class="col-sm-3 col-md-2 control-label">Image </label>
     <div class="col-sm-9 col-md-8 controls">
         <div class="fileupload fileupload-new" data-provides="fileupload">
             <div class="fileupload-new img-thumbnail" style="width: 200px; height: 150px;">
