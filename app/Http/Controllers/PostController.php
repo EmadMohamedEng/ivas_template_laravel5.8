@@ -23,9 +23,53 @@ class PostController extends Controller
      */
     public function index()
     {
-        $contents = Content::all();
-        return view('post.index',compact('contents'));
+        $posts = Post::paginate(5)->all();
+        // dd($contents);
+        return view('post.index',compact('posts'));
     }
+
+    public function allData()
+    {
+      $posts = Post::all();
+
+      // dd($contents);
+
+      $datatable = \DataTables::of($posts)
+        ->addColumn('index', function(Post $post) {
+            return '<input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$content->id}}" class="roles" onclick="collect_selected(this)">';
+        })
+        ->addColumn('content', function(Post $post) {
+            return $post->content->title;
+        })
+        ->addColumn('published_date', function(Post $post) {
+            return $post->published_date;
+        })
+        ->addColumn('Status', function(Post $post) {
+          if($post->active)
+            return 'active';
+          else
+            return 'not active';
+        })
+        ->addColumn('url', function(Post $post) {
+            return $post->url;
+        })
+        ->addColumn('user', function(Post $post) {
+            return $post->user->name;
+        })
+        ->addColumn('action', function(Post $post) {
+            return '<td class="visible-md visible-lg">
+                        <div class="btn-group">
+                            <a class="btn btn-sm show-tooltip" href="'.url("post/".$post->id."/edit").'" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-sm show-tooltip btn-danger" onclick="return ConfirmDelete();" href="'.url("post/".$post->id."/delete").'" title="Delete"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </td>';
+        })
+        ->escapeColumns([])
+        ->make(true);
+      
+        return $datatable;
+    }
+
 
     /**
      * Show the form for creating a new resource.

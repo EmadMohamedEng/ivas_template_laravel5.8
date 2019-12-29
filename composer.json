@@ -19,7 +19,8 @@
         "orangehill/iseed": "^2.6",
         "php-ffmpeg/php-ffmpeg": "^0.13.0",
         "spatie/laravel-permission": "^1.12",
-        "thiagoalessio/tesseract_ocr": "^2.7"
+        "thiagoalessio/tesseract_ocr": "^2.7",
+        "yajra/laravel-datatables-oracle": "^9.8"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
