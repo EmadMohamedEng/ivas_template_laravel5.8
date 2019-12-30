@@ -1,3 +1,24 @@
+<?php if(isset($_REQUEST['provider_id'])): ?>
+<div class="form-group">
+    <label for="textfield5" class="col-sm-3 col-lg-2 control-label">provider<span class="text-danger">*</span></label>
+    <div class="col-sm-9 col-lg-10 controls">
+        <select  name="provider_id" class="form-control chosen-rtl">
+            <option id="provider_<?php echo e($_REQUEST['provider_id']); ?>" value="<?php echo e($_REQUEST['provider_id']); ?>"><?php echo e($_REQUEST['title']); ?>
+
+            </option>
+        </select>
+    </div>
+</div>
+<?php else: ?>
+<div class="form-group">
+    <label class="col-sm-3 col-lg-2 control-label">provider<span class="text-danger">*</span></label>
+    <div class="col-sm-9 col-lg-10 controls">
+        <?php echo Form::select('provider_id',$providers->pluck('title','id'),null,['class'=>'form-control chosen-rtl','required']); ?>
+
+    </div>
+</div>
+<?php endif; ?>
+
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">Title <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">

@@ -390,6 +390,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
+                        <li id="provider">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                                <span>provider</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="provider_index"><a href="<?php echo e(url('provider')); ?>">List provider</a></li>
+                                <li id="provider_create"><a href="<?php echo e(url('provider/create')); ?>">Create provider</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <ul class="nav nav-list">
                         <li id="category">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -455,6 +471,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+
 
 
                     <ul class="nav nav-list">

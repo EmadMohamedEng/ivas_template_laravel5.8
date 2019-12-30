@@ -25,7 +25,6 @@
                                 // if the current route exists in delete all table flags it will appear in view
                                 // else it'll not appear
                                 ?>
-                                <?php echo $__env->make('partial.delete_all', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             </div>
                         </div>
                         <br><br>
