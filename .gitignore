@@ -5,7 +5,7 @@
 /vendor
 .env
 .uploads
-.history 
+.history
 .env.backup
 .phpunit.result.cache
 Homestead.json
