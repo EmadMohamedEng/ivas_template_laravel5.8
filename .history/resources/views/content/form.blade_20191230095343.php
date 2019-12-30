@@ -86,7 +86,7 @@
               $('#normal').hide('slow').find('input').prop('disabled',true);
               $('#video').hide('slow').find('input').prop('disabled',true);
             }
-            if (this.value == 7) {
+            if (this.value == 2) {
               $('#normal').show(1000).find('input').prop('disabled',false);
               $('#advanced').hide('slow');
               $('#image').hide('slow').find('input').prop('disabled',true);

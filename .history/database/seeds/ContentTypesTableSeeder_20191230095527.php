@@ -64,7 +64,7 @@ class ContentTypesTableSeeder extends Seeder
                 'id' => 7,
                 'title' => 'external link',
                 'created_at' => '2019-12-30 13:06:12',
-                'updated_at' => '2019-12-30 13:06:12',
+                'updated_at' => '2019-02-14 13:06:12',
             ),
         ));
 
