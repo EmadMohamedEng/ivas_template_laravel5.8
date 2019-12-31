@@ -256,6 +256,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         <ul class="submenu">
                             <li id="setting-create"><a href="<?php echo e(url('setting/new')); ?>">Add Settings</a></li>
                             <li id="setting-index"><a href="<?php echo e(url('setting')); ?>">Settings</a></li>
+                            <li id="setting-index"><a href="<?php echo e(url('pages')); ?>">Pages</a></li>
                             <li id="setting-import-DB"><a href="<?php echo e(url('database_backups')); ?>">Database Backups</a></li>
                             <li id="setting-index"><a href="<?php echo e(url('clear-cache')); ?>">Clear Cashe</a></li>
                             <li id="setting-seed"><a href="<?php echo e(url('admin/seed_manager')); ?>">Create Seed Files</a></li>
@@ -404,7 +405,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav nav-list">
                         <li id="category">
                             <a href="#" class="dropdown-toggle">
