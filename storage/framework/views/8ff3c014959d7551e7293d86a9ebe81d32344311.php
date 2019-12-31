@@ -43,7 +43,6 @@
                                         <th >Action</th>
                                     </tr>
                                 </thead>
-                                
                             </table>
                         </div>
                     </div>
@@ -73,7 +72,7 @@ $('#post_index').addClass('active');
             //"search": {"regex": true},
             "ajax": {
             type: "GET",
-            "url": "<?php echo url('post/allData'); ?>",
+            "url": "<?php echo url('post/allData?post_id='); ?><?php echo e(isset($post)? $post->id : ''); ?>",
             "data":"<?php echo e(csrf_token()); ?>"
             },
             columns: [

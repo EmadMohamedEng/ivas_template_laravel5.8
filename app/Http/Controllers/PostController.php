@@ -30,9 +30,11 @@ class PostController extends Controller
 
     public function allData()
     {
-      $posts = Post::all();
-
-      // dd($contents);
+      if(isset($request->post_id)){
+        $posts = Content::find($request->post_id)->posts;
+      }else{
+        $posts = Post::all();
+      }
 
       $datatable = \DataTables::of($posts)
         ->addColumn('index', function(Post $post) {
@@ -51,7 +53,10 @@ class PostController extends Controller
             return 'not active';
         })
         ->addColumn('url', function(Post $post) {
-            return $post->url;
+            return '<td>
+            <input type="text"  id="url_h'.$post->content_id.$post->id.'" value="'.$post->url.'">
+            <span class="btn">'.Operator::find($post->operator_id)->country->title.'-'.Operator::find($post->operator_id)->name.'</span>
+            <span class="btn" onclick="x = document.getElementById('."'url_h".$post->content_id.$post->id."'); x.select();document.execCommand('copy')".'"> <i class="fa fa-copy"></i> </span>';
         })
         ->addColumn('user', function(Post $post) {
             return $post->user->name;

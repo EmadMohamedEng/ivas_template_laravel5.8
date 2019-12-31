@@ -25,9 +25,14 @@ class ContentController extends Controller
       return view('content.index',compact('contents'));
     }
 
-    public function allData()
+    public function allData(Request $request)
     {
-      $contents = Content::all();
+      // dd($request->category_id);
+      if(isset($request->category_id)){
+        $contents = Category::find($request->category_id)->contents;
+      }else{
+        $contents = Content::all();
+      }
 
       return \DataTables::of($contents)
         ->addColumn('index', function(Content $content) {

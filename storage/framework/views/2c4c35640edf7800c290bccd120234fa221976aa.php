@@ -69,10 +69,10 @@
         $('#dtcontent').DataTable({
             "processing": true,
             "serverSide": true,
-            //"search": {"regex": true},
+            // "search": {"regex": true},
             "ajax": {
             type: "GET",
-            "url": "<?php echo url('content/allData'); ?>",
+            "url": "<?php echo url('content/allData?category_id='); ?><?php echo e(isset($category)? $category->id : ''); ?>",
             "data":"<?php echo e(csrf_token()); ?>"
             },
             columns: [
