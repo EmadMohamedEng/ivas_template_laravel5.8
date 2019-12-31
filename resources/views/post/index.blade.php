@@ -44,34 +44,6 @@
                                         <th >Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    @foreach($contents as $key=>$content)
-                                    @foreach($content->operators as $value)
-                                    <tr>
-                                        <td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$value->id}}" class="roles" onclick="collect_selected(this)"></td>
-                                        <td>
-                                            {{$content->title}}
-                                        </td>
-                                        <td>{{$value->pivot->published_date}}</td>
-                                        <td>@if($value->pivot->active) active @else not active @endif</td>
-                                        <td>
-                                          <input type="text"  id="url_h{{$value->id}}{{$key}}{{$value->pivot->id}}" value="{{$value->pivot->url}}">
-                                          <span class="btn">{{$value->country->title}}-{{$value->name}}</span>
-                                          <span class="btn" onclick="x = document.getElementById('url_h{{$value->id}}{{$key}}{{$value->pivot->id}}'); x.select();document.execCommand('copy')"> <i class="fa fa-copy"></i> </span>
-                                          <br>
-                                        </td>
-                                        <td>{{DB::table('users')->where('id',$value->pivot->user_id)->first()->name}}</td>
-                                        </td>
-                                        <td class="visible-md visible-lg">
-                                            <div class="btn-group">
-                                                <a class="btn btn-sm show-tooltip" href="{{url("post/".$value->pivot->id."/edit")}}" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm show-tooltip btn-danger" onclick="return ConfirmDelete();" href="{{url("post/".$value->pivot->id."/delete")}}" title="Delete"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endforeach
-                                </tbody> --}}
                             </table>
                         </div>
                     </div>
@@ -101,7 +73,7 @@ $('#post_index').addClass('active');
             //"search": {"regex": true},
             "ajax": {
             type: "GET",
-            "url": "{!! url('post/allData') !!}",
+            "url": "{!! url('post/allData?post_id=') !!}{{isset($post)? $post->id : ''}}",
             "data":"{{csrf_token()}}"
             },
             columns: [
