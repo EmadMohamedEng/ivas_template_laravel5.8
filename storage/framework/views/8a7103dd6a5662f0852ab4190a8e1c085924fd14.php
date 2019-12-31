@@ -1,12 +1,11 @@
-@extends('template')
-@section('page_title')
+<?php $__env->startSection('page_title'); ?>
 Settings
-@stop
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <!-- BEGIN Content -->
 <div id="main-content">
-    @include('errors')
+    <?php echo $__env->make('errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -20,19 +19,20 @@ Settings
                 <div class="box-content">
 
 
-                    <form action="{{url('setting')}}" method="post"
+                    <form action="<?php echo e(url('setting')); ?>" method="post"
                         class="form-horizontal form-bordered form-row-stripped" enctype="multipart/form-data"
                         novalidate>
-                        {!! csrf_field() !!}
+                        <?php echo csrf_field(); ?>
+
                         <input id="hidden_key" name="key" type="hidden" />
 
                         <div class="form-group">
                             <label for="textfield5" class="col-sm-3 col-lg-2 control-label">Setting type</label>
                             <div class="col-sm-9 col-lg-10 controls">
                                 <select id="first_select" class="form-control chosen-rtl">
-                                    @foreach ($types as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($key); ?>"><?php echo e($value); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -87,10 +87,12 @@ Settings
                         </div>
 
                         <div class="form-group" hidden id="videocont" novalidate>
-                            {!! Form::label('Video',\Lang::get('messages.video').'*',['class'=>'col-sm-3 col-lg-2
-                            control-label']) !!}
+                            <?php echo Form::label('Video',\Lang::get('messages.video').'*',['class'=>'col-sm-3 col-lg-2
+                            control-label']); ?>
+
                             <div class="col-sm-9 col-lg-10 controls">
-                                {!! Form::file('Video',["accept"=>"video/*",'class'=>'default']) !!}
+                                <?php echo Form::file('Video',["accept"=>"video/*",'class'=>'default']); ?>
+
                                 <span class='label label-important'>NOTE!</span>
                                 <span>Only extension supported mp4, flv, and 3gp</span>
                             </div>
@@ -98,18 +100,20 @@ Settings
                         </div>
 
                         <div class="form-group" hidden id="audiocont" novalidate>
-                            {!! Form::label('Audio',\Lang::get('messages.audio').'*',['class'=>'col-sm-3 col-lg-2
-                            control-label']) !!}
+                            <?php echo Form::label('Audio',\Lang::get('messages.audio').'*',['class'=>'col-sm-3 col-lg-2
+                            control-label']); ?>
+
                             <div class="col-sm-9 col-lg-10 controls">
-                                {!! Form::file('Audio',["accept"=>"audio/*",'class'=>'default']) !!}
+                                <?php echo Form::file('Audio',["accept"=>"audio/*",'class'=>'default']); ?>
+
                                 <span class='label label-important'>NOTE!</span>
                                 <span>Only extension supported mp3, webm, and wav</span>
                             </div>
                         </div>
 
                         <div class="form-group" hidden id="fileManCont" novalidate>
-                            {!! Form::label('File','Extensions Allowed *',['class'=>'col-sm-3 col-lg-2 control-label'])
-                            !!}
+                            <?php echo Form::label('File','Extensions Allowed *',['class'=>'col-sm-3 col-lg-2 control-label']); ?>
+
                             <div class="col-sm-9 col-lg-10 controls">
                                 <select class="form-control" name="extensions[]" multiple>
                                     <option value="image">Images</option>
@@ -152,8 +156,8 @@ Settings
         </div>
     </div>
 </div>
-@stop
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script>
 $('#first_select').on('change', function() {
     $('#key').prop('disabled', false);
@@ -259,4 +263,6 @@ $('#first_select').on('change', function() {
 $('#setting').addClass('active');
 $('#setting-create').addClass('active');
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/setting/create.blade.php ENDPATH**/ ?>

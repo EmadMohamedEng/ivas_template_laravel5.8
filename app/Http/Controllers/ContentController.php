@@ -57,6 +57,8 @@ class ContentController extends Controller
             return '<video src="'.url(isset($content->path)?$content->path: '').'" style="width:250px;height:200px" height="200px" controls poster="'.url(isset($content->image_preview)?$content->image_preview: '').'"></video>';
             elseif($content->type->id == 6)
             return '<iframe src="'.$content->path.'" width="250px" height="200px"></iframe>';
+            elseif($content->type->id == 7)
+            return '<a href="'.$content->path.'">'.$content->path.'</a>' ;
         })
         ->addColumn('content_type', function(Content $content) {
             return $content->type->title;

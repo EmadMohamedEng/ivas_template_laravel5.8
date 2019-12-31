@@ -69,7 +69,8 @@ Route::get('/test','DashboardController@test');
         Route::post('routes/store_v2','RouteController@store_v2') ;
         Route::get('JIC/index', 'HomeController@JICindex');
 
-        Route::get('ldap','DashboardController@ldap') ;
+        Route::get('ldap','DashboardController@ldap');
+        Route::get('pages','SettingController@page_index');
         Route::get('export_DB','DashboardController@export_DB_backup') ;
         Route::get('database_backups','DashboardController@list_backups')  ;
         Route::get('delete_backup','DashboardController@delete_backup')  ;

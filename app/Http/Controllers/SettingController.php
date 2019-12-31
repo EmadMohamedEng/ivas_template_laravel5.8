@@ -29,8 +29,19 @@ class SettingController extends Controller
     public function index()
     {
         $title = 'Index - setting';
-        $settings = Setting::with('type')->orderBy('order','ASC')->get();
+
+        // $pages = Setting::where('type_id', 9)->get();
+
+        $settings = Setting::with('type')->orderBy('order','ASC')->whereNotIn('type_id', [9])->get();
+
+        // dd($settings);
         return view('setting.index',compact('settings','title'));
+    }
+    public function page_index()
+    {
+        $title = 'Index - setting';
+        $settings = Setting::where('type_id', 9)->get();
+        return view('setting.index_page',compact('settings','title'));
     }
 
     /**
@@ -65,7 +76,7 @@ class SettingController extends Controller
            if ($request->hasFile('Image'))
             {
                 $imgExtensions = array("png","jpeg","jpg");
-                $destinationFolder = "uploads/settings_images/";
+                $destinationFolder = "setting-image/settings_images/";
                 $file = $request->file("Image");
                 if(! in_array($file->getClientOriginalExtension(),$imgExtensions))
                 {
@@ -83,7 +94,7 @@ class SettingController extends Controller
            if ($request->hasFile('Video'))
             {
                 $vidExtensions = array("mp4","flv","3gp");
-                $destinationFolder = "uploads/settings_videos/";
+                $destinationFolder = "setting-image/settings_videos/";
                 $file = $request->file("Video");
                 if(! in_array($file->getClientOriginalExtension(),$vidExtensions))
                 {
@@ -102,7 +113,7 @@ class SettingController extends Controller
            if ($request->hasFile('Audio'))
             {
                 $audExtensions = array("mp3","webm","wav");
-                $destinationFolder = "uploads/settings_sounds/";
+                $destinationFolder = "setting-image/settings_sounds/";
                 $file = $request->file("Audio");
                 if(! in_array($file->getClientOriginalExtension(),$audExtensions))
                 {
@@ -146,6 +157,10 @@ class SettingController extends Controller
                 $setting->value = $request->Advanced_Text;}
             elseif (!empty($request->Normal_Text)){
                 $setting->value = $request->Normal_Text;}
+            elseif (!empty($request->input_color)){
+                $setting->value = $request->input_color;}
+                elseif (!empty($request->page)){
+                    $setting->value = $request->page;}
             else
             {
                 \Session::flash('failed','Value is Required');
@@ -193,7 +208,7 @@ class SettingController extends Controller
             {
 
                 $imgExtensions = array("png","jpeg","jpg");
-                $destinationFolder = "uploads/settings_images/";
+                $destinationFolder = "setting-image/settings_images/";
                 $file = $request->file("value");
                 if(! in_array($file->getClientOriginalExtension(),$imgExtensions))
                 {
@@ -216,7 +231,7 @@ class SettingController extends Controller
             {
 
                 $vidExtensions = array("mp4","flv","3gp");
-                $destinationFolder = "uploads/settings_videos/";
+                $destinationFolder = "setting-image/settings_videos/";
                 $file = $request->file("Video");
                 if(! in_array($file->getClientOriginalExtension(),$vidExtensions))
                 {
@@ -239,7 +254,7 @@ class SettingController extends Controller
             {
 
                 $audExtensions = array("mp3","webm","wav");
-                $destinationFolder = "uploads/settings_sounds/";
+                $destinationFolder = "setting-image/settings_sounds/";
                 $file = $request->file("Audio");
                 if(! in_array($file->getClientOriginalExtension(),$audExtensions))
                 {
@@ -286,6 +301,10 @@ class SettingController extends Controller
 
             if (!empty($request->value)){
                 $setting->value = $request->value;}
+                elseif (!empty($request->input_color)){
+                    $setting->value = $request->input_color;}
+                    elseif (!empty($request->page)){
+                        $setting->value = $request->page;}
             else{
                 \Session::flash('failed','No changes takes place');
                 return redirect('setting');

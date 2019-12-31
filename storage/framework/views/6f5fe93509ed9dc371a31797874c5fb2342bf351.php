@@ -1,9 +1,8 @@
-@extends('template')
-@section('page_title')
+<?php $__env->startSection('page_title'); ?>
 Settings
-@stop
-@section('content')
-@include('errors')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- BEGIN Content -->
 <div id="main-content">
     <div class="row">
@@ -19,7 +18,7 @@ Settings
                 <div class="box-content">
                     <div class="btn-toolbar pull-right">
                         <div class="btn-group">
-                            <a class="btn btn-circle show-tooltip" title="" href="{{url('setting/new')}}"
+                            <a class="btn btn-circle show-tooltip" title="" href="<?php echo e(url('setting/new')); ?>"
                                 data-original-title="Add new record"><i class="fa fa-plus"></i></a>
                             <?php
 								$table_name = "settings" ;
@@ -27,7 +26,6 @@ Settings
 								// if the current route exists in delete all table flags it will appear in view
 								// else it'll not appear
 							?>
-                            @include('partial.delete_all')
                         </div>
                     </div>
                     <br><br>
@@ -42,54 +40,50 @@ Settings
                                 </tr>
                             </thead>
                             <tbody id="tablecontents">
-                                @foreach($settings as $setting)
+                                <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr class="table-flag-blue">
                                     <td><input class="select_all_template" type="checkbox" name="selected_rows[]"
-                                            value="{{$setting->id}}" onclick="collect_selected(this)"></td>
-                                    <td>{{$setting->key}}</td>
+                                            value="<?php echo e($setting->id); ?>" onclick="collect_selected(this)"></td>
+                                    <td><?php echo e($setting->key); ?></td>
                                     <td>
 
-                                        @if(file_exists($setting->value))
-                                        @if($setting->type_id == "3")
-                                        <img src="{{url($setting->value)}}" width="300" height="225">
-                                        @elseif($setting->type_id == "4")
+                                        <?php if(file_exists($setting->value)): ?>
+                                        <?php if($setting->type_id == "3"): ?>
+                                        <img src="<?php echo e(url($setting->value)); ?>" width="300" height="225">
+                                        <?php elseif($setting->type_id == "4"): ?>
                                         <video controls="" width="300" height="225">
-                                            <source src="{{url($setting->value)}}" preload="none">
+                                            <source src="<?php echo e(url($setting->value)); ?>" preload="none">
                                         </video>
-                                        @elseif($setting->type_id == "5")
+                                        <?php elseif($setting->type_id == "5"): ?>
                                         <audio controls="">
-                                            <source src="{{url($setting->value)}}" type="audio/mpeg" preload="none">
+                                            <source src="<?php echo e(url($setting->value)); ?>" type="audio/mpeg" preload="none">
                                         </audio>
-                                        @endif
-                                        @elseif($setting->type->title == 'selector')
-                                        @if($setting->value)
+                                        <?php endif; ?>
+                                        <?php elseif($setting->type->title == 'selector'): ?>
+                                        <?php if($setting->value): ?>
                                         True
-                                        @else
+                                        <?php else: ?>
                                         False
-                                        @endif
-                                        @elseif($setting->type_id == "1")
-                                        {!! $setting->value !!}
-                                        @elseif($setting->type_id == "2")
-                                        {!! $setting->value !!}
-                                        @elseif($setting->type_id == "6")
-                                        {!! $setting->value !!}
-                                        @elseif($setting->type_id == "8")
-                                        <p style="background:{{$setting->value}};width: 10%;border-radius: 5px;" title="{{$setting->value}}">&#8194;</p>
-                                        @endif
+                                        <?php endif; ?>
+                                        <?php elseif($setting->type_id == "9"): ?>
+                                        <?php echo $setting->value; ?>
+
+
+                                        <?php endif; ?>
                                     </td>
                                     <td class="visible-md visible-lg">
                                         <div class="btn-group">
                                             <a class="btn btn-sm show-tooltip" title=""
-                                                href="{{url('setting/'.$setting->id.'/edit')}}"
+                                                href="<?php echo e(url('setting/'.$setting->id.'/edit')); ?>"
                                                 data-original-title="Edit"><i class="fa fa-edit"></i></a>
                                             <a class="btn btn-sm btn-danger show-tooltip" title=""
                                                 onclick='return ConfirmDelete()'
-                                                href="{{url('setting/'.$setting->id.'/delete')}}"
+                                                href="<?php echo e(url('setting/'.$setting->id.'/delete')); ?>"
                                                 data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -99,8 +93,8 @@ Settings
     </div>
 </div>
 
-@stop
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
@@ -129,10 +123,10 @@ Settings
 //   $.ajax({
 //     type: "POST",
 //     dataType: "json",
-//     url: "{{ url('sortabledatatable') }}",
+//     url: "<?php echo e(url('sortabledatatable')); ?>",
 //     data: {
 //       order:order,
-//       _token: '{{csrf_token()}}'
+//       _token: '<?php echo e(csrf_token()); ?>'
 //     },
 //     success: function(response) {
 //         if (response.status == "success") {
@@ -150,4 +144,6 @@ Settings
 $('#setting').addClass('active');
 $('#setting-index').addClass('active');
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/setting/index_page.blade.php ENDPATH**/ ?>

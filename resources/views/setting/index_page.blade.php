@@ -27,7 +27,6 @@ Settings
 								// if the current route exists in delete all table flags it will appear in view
 								// else it'll not appear
 							?>
-                            @include('partial.delete_all')
                         </div>
                     </div>
                     <br><br>
@@ -67,14 +66,9 @@ Settings
                                         @else
                                         False
                                         @endif
-                                        @elseif($setting->type_id == "1")
+                                        @elseif($setting->type_id == "9")
                                         {!! $setting->value !!}
-                                        @elseif($setting->type_id == "2")
-                                        {!! $setting->value !!}
-                                        @elseif($setting->type_id == "6")
-                                        {!! $setting->value !!}
-                                        @elseif($setting->type_id == "8")
-                                        <p style="background:{{$setting->value}};width: 10%;border-radius: 5px;" title="{{$setting->value}}">&#8194;</p>
+
                                         @endif
                                     </td>
                                     <td class="visible-md visible-lg">

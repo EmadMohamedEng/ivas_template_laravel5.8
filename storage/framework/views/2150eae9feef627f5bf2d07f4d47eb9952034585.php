@@ -1,9 +1,8 @@
-@extends('template')
-@section('page_title')
+<?php $__env->startSection('page_title'); ?>
   Content
-@stop
-@section('content')
-    @include('errors')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -15,14 +14,17 @@
                     </div>
                 </div>
                 <div class="box-content">
-                    @if($content)
-                    {!! Form::model($content,["url"=>"content/$content->id","class"=>"form-horizontal","method"=>"patch","files"=>"True"]) !!}
-                    @include('content.input',['buttonAction'=>'Edit','required'=>'  (optional)'])
-                    @else
-                    {!! Form::open(["url"=>"content","class"=>"form-horizontal","method"=>"POST","files"=>"True"]) !!}
-                    @include('content.input',['buttonAction'=>'Save'])
-                    @endif
-                    {!! Form::close() !!}
+                    <?php if($content): ?>
+                    <?php echo Form::model($content,["url"=>"content/$content->id","class"=>"form-horizontal","method"=>"patch","files"=>"True"]); ?>
+
+                    <?php echo $__env->make('content.input',['buttonAction'=>'Edit','required'=>'  (optional)'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php else: ?>
+                    <?php echo Form::open(["url"=>"content","class"=>"form-horizontal","method"=>"POST","files"=>"True"]); ?>
+
+                    <?php echo $__env->make('content.input',['buttonAction'=>'Save'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php endif; ?>
+                    <?php echo Form::close(); ?>
+
                 </div>
             </div>
 
@@ -30,8 +32,8 @@
 
     </div>
 
-@stop
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <script>
         $('#contents').addClass('active');
         $('#contents_create').addClass('active');
@@ -97,4 +99,6 @@
             }
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/content/form.blade.php ENDPATH**/ ?>
