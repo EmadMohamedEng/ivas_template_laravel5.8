@@ -420,7 +420,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
 
-                    <!-- <ul class="nav nav-list">
+                     <ul class="nav nav-list">
                         <li id="sub_category">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -434,7 +434,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <li id="sub_category_create"><a href="{{url('sub_category/create')}}">Create Sub Category</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
 
                     <?php $content_type_flag = DB::table('settings')->where('key','like','%content_type_flag%')->first(); ?>
                     @if($content_type_flag->value)
@@ -488,6 +488,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+
+                    <ul class="nav nav-list">
+                        <li id="audios">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-sound-stereo"></i>
+                                <span>Rbts</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="audios-index"><a href="{{url('rbt')}}">List Rbts</a></li>
+                                <li id="audios-create"><a href="{{url('rbt/create')}}">Create New Item</a></li>
+                            </ul>
+                            <!-- END Submenu -->
+                        </li>
+                    </ul>  
                     {{--@endif--}}
                 </ul>
                 <!-- END Navlist -->

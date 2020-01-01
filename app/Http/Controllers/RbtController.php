@@ -11,6 +11,7 @@ use App\Content;
 use App\Country;
 use App\Operator;
 use App\RbtCode;
+use App\Provider;
 
 use Validator;
 use Auth;
@@ -36,8 +37,9 @@ class RbtController extends Controller
     {
       $contents  = Content::where('content_type_id',4)->get();
       $operators = Operator::all();
+      $providers = Provider::all();
       $rbt      = NULL;
-      return view('rbt.form',compact('contents','operators','rbt'));
+      return view('rbt.form',compact('contents','operators','rbt', 'providers'));
     }
 
     /**

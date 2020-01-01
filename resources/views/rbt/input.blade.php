@@ -26,17 +26,28 @@
   @endif
 
   @if($rbt)
-    <div class="form-group">
-        <label class="col-sm-3 col-lg-2 control-label">Operator<span class="text-danger">*</span></label>
-        <div class="col-sm-9 col-lg-10 controls">
-          <select class="form-control chosen-rtl"  name="operator_id" required>
-            @foreach($operators as $operator)
-            <option value="{{$operator->id}}" @if($rbt) @if($rbt->operator_id == $operator->id) selected @endif @endif>{{$operator->name}}-{{$operator->country->title}}</option>
-            @endforeach
-          </select>
-        </div>
-    </div>
+  <div class="form-group">
+      <label class="col-sm-3 col-lg-2 control-label">Operator<span class="text-danger">*</span></label>
+      <div class="col-sm-9 col-lg-10 controls">
+        <select class="form-control chosen-rtl"  name="operator_id" required>
+          @foreach($operators as $operator)
+          <option value="{{$operator->id}}" @if($rbt) @if($rbt->operator_id == $operator->id) selected @endif @endif>{{$operator->name}}-{{$operator->country->title}}</option>
+          @endforeach
+        </select>
+      </div>
+  </div>
 
+  <div class="form-group">
+      <label class="col-sm-3 col-lg-2 control-label">Provider<span class="text-danger">*</span></label>
+      <div class="col-sm-9 col-lg-10 controls">
+        <select class="form-control chosen-rtl"  name="provider_id" required>
+          @foreach($providers as $provider)
+          <option value="{{$provider->id}}" @if($rbt) @if($rbt->provider_id == $provider->id) selected @endif @endif>{{$provider->name}}-{{$provider->country->title}}</option>
+          @endforeach
+        </select>
+      </div>
+  </div>
+  
     <div class="form-group">
         <label class="col-sm-3 col-lg-2 control-label">rbt_code <span class="text-danger">*</span></label>
         <div class="col-sm-9 col-lg-10 controls">

@@ -38,7 +38,7 @@
 
         //add layer btn
         var rbt = '<div id="code" style="background-color: #f9f7f7;border-radius: 8px;box-shadow: 2px 2px 2px #e8e6e6;padding: 5px;margin:10px 0px;text-align:center">\
-            <div class="col-sm-6">\
+            <div class="col-sm-4">\
                 <label class="control-label">Operator<span class="text-danger">*</span></label>\
                 <div class="controls">\
                   <select class="form-control chosen-rtl"  name="operator_id[]" required>\
@@ -48,7 +48,17 @@
                   </select>\
                 </div>\
             </div>\
-            <div class="col-sm-5">\
+            <div class="col-sm-4">\
+                <label class="control-label">Provider<span class="text-danger">*</span></label>\
+                <div class="controls">\
+                  <select class="form-control chosen-rtl"  name="provider_id[]" required>\
+                    @foreach($providers as $provider)\
+                    <option value="{{$provider->id}}" @if($rbt) @if($rbt->provider_id == $provider->id) selected @endif @endif>{{$provider->name}}-{{$provider->country->title}}</option>\
+                    @endforeach\
+                  </select>\
+                </div>\
+            </div>\
+            <div class="col-sm-4">\
                 <label class="control-label">rbt_code <span class="text-danger">*</span></label>\
                 <div class="controls">\
                     {!! Form::number("rbt_code[]",null,["placeholder"=>"rbt_code","class"=>"form-control text-center","min"=>0 , "required"]) !!}\
