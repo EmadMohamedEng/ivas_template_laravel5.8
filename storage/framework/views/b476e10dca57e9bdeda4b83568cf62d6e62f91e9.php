@@ -40,22 +40,12 @@
 
         //add layer btn
         var rbt = '<div id="code" style="background-color: #f9f7f7;border-radius: 8px;box-shadow: 2px 2px 2px #e8e6e6;padding: 5px;margin:10px 0px;text-align:center">\
-            <div class="col-sm-4">\
+            <div class="col-sm-6">\
                 <label class="control-label">Operator<span class="text-danger">*</span></label>\
                 <div class="controls">\
                   <select class="form-control chosen-rtl"  name="operator_id[]" required>\
                     <?php $__currentLoopData = $operators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $operator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>\
                     <option value="<?php echo e($operator->id); ?>" <?php if($rbt): ?> <?php if($rbt->operator_id == $operator->id): ?> selected <?php endif; ?> <?php endif; ?>><?php echo e($operator->name); ?>-<?php echo e($operator->country->title); ?></option>\
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>\
-                  </select>\
-                </div>\
-            </div>\
-            <div class="col-sm-4">\
-                <label class="control-label">Provider<span class="text-danger">*</span></label>\
-                <div class="controls">\
-                  <select class="form-control chosen-rtl"  name="provider_id[]" required>\
-                    <?php $__currentLoopData = $providers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $provider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>\
-                    <option value="<?php echo e($provider->id); ?>" <?php if($rbt): ?> <?php if($rbt->provider_id == $provider->id): ?> selected <?php endif; ?> <?php endif; ?>><?php echo e($provider->name); ?>-<?php echo e($provider->country->title); ?></option>\
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>\
                   </select>\
                 </div>\
