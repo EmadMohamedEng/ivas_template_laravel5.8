@@ -134,7 +134,7 @@ function ConfirmDelete()
             <button type="button" class="navbar-toggle navbar-btn collapsed" data-toggle="collapse" data-target="#sidebar">
                 <span class="fa fa-bars"></span>
             </button>
-            <a class="navbar-brand" href="{{url('/dashboard')}}">
+            <a class="navbar-brand" href="{{url('/')}}">
                 <small>
                     <i class="fa fa-user-secret"></i>
                     @lang('messages.dashboard')
@@ -490,7 +490,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
-                        <li id="audios">
+                        <li id="rbts">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-sound-stereo"></i>
                                 <span>Rbts</span>
@@ -498,12 +498,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </a>
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="audios-index"><a href="{{url('rbt')}}">List Rbts</a></li>
-                                <li id="audios-create"><a href="{{url('rbt/create')}}">Create New Item</a></li>
+                                <li id="rbts-index"><a href="{{url('rbt')}}">List Rbts</a></li>
+                                <li id="rbts-create"><a href="{{url('rbt/create')}}">Create New Item</a></li>
                             </ul>
                             <!-- END Submenu -->
                         </li>
-                    </ul>  
+                    </ul>
                     {{--@endif--}}
                 </ul>
                 <!-- END Navlist -->

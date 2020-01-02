@@ -15,6 +15,7 @@ use App\Provider;
 
 use Validator;
 use Auth;
+
 class RbtController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class RbtController extends Controller
     public function index()
     {
         $contents = Content::all();
-        return view('rbt.index',compact('contents'));
+        return view('rbt.index', compact('contents'));
     }
 
     /**
@@ -35,11 +36,11 @@ class RbtController extends Controller
      */
     public function create()
     {
-      $contents  = Content::where('content_type_id',4)->get();
-      $operators = Operator::all();
-      $providers = Provider::all();
-      $rbt      = NULL;
-      return view('rbt.form',compact('contents','operators','rbt', 'providers'));
+        $contents  = Content::where('content_type_id', 4)->get();
+        $operators = Operator::all();
+        //$providers = Provider::all();
+        $rbt      = NULL;
+        return view('rbt.form', compact('contents', 'operators', 'rbt'));
     }
 
     /**
@@ -50,25 +51,32 @@ class RbtController extends Controller
      */
     public function store(Request $request)
     {
-      $validator = Validator::make($request->all(), [
-                  'rbt_code' => 'required',
-                  'content_id' => 'required',
-                  'operator_id'=> 'required'
-          ]);
+        $this->validate($request, [
+            'rbt_code' => 'required',
+            'content_id' => 'required',
+            'operator_id' => 'required'
+        ]);
+        //$content  = Content::create($request->all());
+        $content = Content::findOrFail($request->content_id);
+        $pro_id = $content->category->provider->id;
+        $content->provider_id = $pro_id;
 
-      if ($validator->fails()) {
-          return back()->withErrors($validator)->withInput();
-      }
+        foreach ($request->operator_id as  $key => $operator_id) {
+            $content->rbt_operators()->attach([$operator_id => ['rbt_code' => $request->rbt_code[$key], 'provider_id' => $pro_id]]);
+            // dd('here');
+        }
+
+        // $rbt = new RbtCode();
+        // $rbt->rbt_code = $request->rbt_code[$key];
+        // $rbt->content_id = $content->id;
+        // $rbt->provider_id = $pro_id;
+        // $rbt->operator_id = $request->operator_id[$key];
+        // //dd($pro_id);
+        // $rbt->save();
 
 
-      $content = Content::findOrFail($request->content_id);
-
-      foreach ($request->operator_id as  $key=>$operator_id) {
-        $operator = $content->rbt_operators()->attach([$operator_id => ['rbt_code' => $request->rbt_code[$key]]]);
-      }
-
-      \Session::flash('success', 'rbt created Successfully');
-      return redirect('rbt/'.$request->content_id);
+        \Session::flash('success', 'rbt created Successfully');
+        return redirect('rbt/' . $request->content_id);
     }
 
     /**
@@ -79,8 +87,8 @@ class RbtController extends Controller
      */
     public function show($id)
     {
-     $contents=  Content::whereId($id)->get();
-     return view('rbt.index',compact('contents'));
+        $contents =  Content::whereId($id)->get();
+        return view('rbt.index', compact('contents'));
     }
 
     /**
@@ -89,12 +97,12 @@ class RbtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,Request $request)
+    public function edit($id, Request $request)
     {
-      $rbt = RbtCode::findOrFail($id);
-      $contents= Content::where('content_type_id',4)->get();
-      $operators = Operator::all();
-      return view('rbt.form',compact('rbt','contents','operators'));
+        $rbt = RbtCode::findOrFail($id);
+        $contents = Content::where('content_type_id', 4)->get();
+        $operators = Operator::all();
+        return view('rbt.form', compact('rbt', 'contents', 'operators'));
     }
 
     /**
@@ -106,21 +114,21 @@ class RbtController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $validator = Validator::make($request->all(), [
-          'rbt_code' => 'required',
-          'content_id' => 'required',
-          'operator_id'=> 'required'
-          ]);
+        $validator = Validator::make($request->all(), [
+            'rbt_code' => 'required',
+            'content_id' => 'required',
+            'operator_id' => 'required'
+        ]);
 
-      if ($validator->fails()) {
-          return back()->withErrors($validator)->withInput();
-      }
-      $rbt = RbtCode::findOrFail($id);
-      $content = Content::findOrFail($request->content_id);
-      $rbt->update($request->all());
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        $rbt = RbtCode::findOrFail($id);
+        $content = Content::findOrFail($request->content_id);
+        $rbt->update($request->all());
 
-      \Session::flash('success', 'RbtCode Update Successfully');
-      return redirect('rbt/'.$request->content_id);
+        \Session::flash('success', 'RbtCode Update Successfully');
+        return redirect('rbt/' . $request->content_id);
     }
 
     /**
@@ -129,11 +137,11 @@ class RbtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
+    public function destroy($id, Request $request)
     {
-      $rbt = RbtCode::findOrFail($id);
-      $rbt->delete();
-      \Session::flash('success', 'RbtCode Delete Successfully');
-      return back();
+        $rbt = RbtCode::findOrFail($id);
+        $rbt->delete();
+        \Session::flash('success', 'RbtCode Delete Successfully');
+        return back();
     }
 }

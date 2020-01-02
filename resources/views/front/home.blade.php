@@ -25,14 +25,14 @@
             {{--  <video class="mx-auto d-block text-center" id="myVideo" width="100%" controls>
                 <source src="{{$main_video->video}}" type="video/mp4">
             </video>  --}}
-            
+
             <img src="{{$main_video->service->provider->image}}" style="width:100%;height:200px" >
-           
+
         </div>
         <h6 style="    color: #f3e5b8; margin:10px;text-align:center">{{$main_video->title }}</h6>
     </a>
 
-        
+
         <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -89,7 +89,7 @@
 
                             <h5 class="modal-title" id="exampleModalLabel">اقرب مسجد</h5>
                         </div>
-                        <div class="modal-body">                           
+                        <div class="modal-body">
                             <div id="map"></div>
                         </div>
                         <div class="modal-footer">
@@ -191,7 +191,7 @@
                         <h6>{{$topic->title}}</h6>
                     </a>
                 </div>
-                @endforeach                
+                @endforeach
 
             </div>
         </div>
