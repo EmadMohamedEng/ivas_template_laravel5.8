@@ -1,5 +1,4 @@
-@extends('front.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <?php
 preg_match("/iPhone|iPad|iPod/", $_SERVER['HTTP_USER_AGENT'], $matches);
 $os = current($matches);
@@ -35,20 +34,20 @@ switch ($os) {
 </style>
 
 <!-- main content -->
-@if($content->content_type_id == 5)
+<?php if($content->content_type_id == 5): ?>
 <div class="main">
     <div class="container">
         <div class="video_page">
             <div class="title_content">
-                <h6>{{$content->title}}</h6>
-                <img src="{{url($content->image_preview)}}" alt="{{$content->title}}">
+                <h6><?php echo e($content->title); ?></h6>
+                <img src="<?php echo e(url($content->image_preview)); ?>" alt="<?php echo e($content->title); ?>">
             </div>
 
             <div class="video">
                 <video class="mx-auto d-block text-center" id="myVideo" width="100%" controls>
-                    <source src="{{url($content->path)}}" type="video/mp4">
+                    <source src="<?php echo e(url($content->path)); ?>" type="video/mp4">
                 </video>
-                <h6>{{$content->title}}</h6>
+                <h6><?php echo e($content->title); ?></h6>
             </div>
 
             <!-- Modal -->
@@ -67,8 +66,8 @@ switch ($os) {
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>{{$hjrri_date->day.' - '.$hjrri_date->month .' - '.$hjrri_date->year}}</th>
-                                        <th>{{date('d/m/Y')}}</th>
+                                        <th><?php echo e($hjrri_date->day.' - '.$hjrri_date->month .' - '.$hjrri_date->year); ?></th>
+                                        <th><?php echo e(date('d/m/Y')); ?></th>
                                     </tr>
                                     <tr>
                                         <th>الصلاة</th>
@@ -76,12 +75,12 @@ switch ($os) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($prayer_times as $key=>$value)
+                                    <?php $__currentLoopData = $prayer_times; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{$key}}</td>
-                                        <td>{{$value}}</td>
+                                        <td><?php echo e($key); ?></td>
+                                        <td><?php echo e($value); ?></td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -119,22 +118,22 @@ switch ($os) {
             <!-- End Modal2 -->
 
             <div class="btns">
-            <a class="btn" href="{{url('list_contents/'.$content->category_id)}}">المزيد</a>
+            <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
             </div>
         </div>
     </div>
 </div>
-@elseif($content->content_type_id == 4)
+<?php elseif($content->content_type_id == 4): ?>
 <div class="main">
     <div class="container">
         <div class="audio_page">
 
             <div class="title_content">
-                <h6>{{$content->title}}</h6>
+                <h6><?php echo e($content->title); ?></h6>
             </div>
             <div class="audio">
                 <div class="audio-player">
-                    <audio id="player" src="{{url($content->path)}}"></audio>
+                    <audio id="player" src="<?php echo e(url($content->path)); ?>"></audio>
 
                     <div class="time-holder cf">
                         <div class="duration">00:50</div>
@@ -156,72 +155,75 @@ switch ($os) {
             </div>
 
             <div class="btns">
-            <a class="btn" href="{{url('list_contents/'.$content->category_id)}}">المزيد</a>
+            <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
             </div>
 
         </div>
     </div>
 </div>
-@elseif($content->content_type_id == 3)
+<?php elseif($content->content_type_id == 3): ?>
 <div class="main">
     <div class="container">
         <div class="image_page">
             <div class="title_content">
-                <h6>{{$content->title}}</h6>
+                <h6><?php echo e($content->title); ?></h6>
             </div>
 
             <div class="video">
-                <img src="{{url($content->path)}}" alt="" class="mx-auto d-block text-center" width="100%">
+                <img src="<?php echo e(url($content->path)); ?>" alt="" class="mx-auto d-block text-center" width="100%">
             </div>
 
             <div class="btns">
-                <a class="btn" href="{{url('list_contents/'.$content->category_id)}}">المزيد</a>
+                <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
             </div>
             <div class="btns">
-                <a class="btn" href="{{url($content->path)}}"download>تحميل</a>
+                <a class="btn" href="<?php echo e(url($content->path)); ?>"download>تحميل</a>
             </div>
         </div>
     </div>
 </div>
-@elseif($content->content_type_id == 6)
+<?php elseif($content->content_type_id == 6): ?>
 <div class="main">
     <div class="container">
         <div class="image_page">
             <div class="title_content">
-                <h6>{{$content->title}}</h6>
+                <h6><?php echo e($content->title); ?></h6>
             </div>
 
             <div class="video">
-            <iframe style="width: 100%" src="{{url($content->path)}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe style="width: 100%" src="<?php echo e(url($content->path)); ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
             <div class="btns">
-            <a class="btn" href="{{url('list_contents/'.$content->category_id)}}">المزيد</a>
+            <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
             </div>
         </div>
     </div>
 </div>
-@else
+<?php else: ?>
 <div class="main">
     <div class="container">
         <div class="image_page">
             <div class="title_content">
-                <h6>{{$content->title}}</h6>
+                <h6><?php echo e($content->title); ?></h6>
             </div>
 
-            {!! $content->path !!}
+            <?php echo $content->path; ?>
+
 
 
             <div class="btns">
-            <a class="btn" href="{{url('list_contents/'.$content->category_id)}}">المزيد</a>
+            <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
             </div>
         </div>
     </div>
 </div>
-@endif
-@stop
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
 <!--====================== Modal =================== -->
-@section('script')
-<script src="{{url('assets/front/')}}/js/mosque.js"></script>
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(url('assets/front/')); ?>/js/mosque.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkPbH3-wDpLOsruf4eBsae2q3xnb6153s&libraries=places&callback=initMap&language=ar" async defer></script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('front.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/play_video.blade.php ENDPATH**/ ?>

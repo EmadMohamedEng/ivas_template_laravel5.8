@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Video;
+use App\Content;
 use App\Provider;
-use App\Service;
+use App\Category;
 use App\Audio;
 use App\Post;
 
@@ -18,122 +18,138 @@ use Monolog\Handler\StreamHandler;
 use Illuminate\Support\Facades\Session;
 
 
-class FrontController extends Controller {
+class FrontController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         return view('front.index');
     }
 
-    public function index_mobile() {
+    public function index_mobile()
+    {
         return view('front.index_');
     }
 
-    public function home(Request $request) {
+    public function home(Request $request)
+    {
 
         if ($request->has('OpID')) {
             $opID = $request->OpID;
-            $main_video = Post::join('contents', 'contents.id', '=', 'posts.video_id')
-                            ->where('posts.operator_id', $opID)
-                            ->where('posts.active', 1)
-                            ->where('posts.show_date', '>=', date('y-m-d'))
-                            ->where('contents.type', 1)
-                            ->where(function($query) {
-                                return $query->where('contents.created_at', 'like', date('Y-m-d') . '%')
-                                        ->orWhere('contents.created_at', '<=', date('Y-m-d'));
-                            })->orderBy('contents.created_at', 'Desc')->first();
+            $main_video = Post::join('contents', 'contents.id', '=', 'posts.content_id')
+                ->where('posts.operator_id', $opID)
+                ->where('posts.active', 1)
+                ->where('posts.published_date', '>=', date('y-m-d'))
+                ->where('contents.content_type_id', 5)
+                ->orderBy('posts.created_at', 'Desc')->first();
         } else {
-            $main_video = Video::where('type', 1)
-                            ->where(function($query) {
-                                return $query->where('created_at', 'like', date('Y-m-d') . '%')
-                                        ->orWhere('created_at', '<=', date('Y-m-d'));
-                            })->orderBy('created_at', 'Desc')->first();
+            $main_video = Content::where('content_type_id', 5)
+                ->where(function ($query) {
+                    return $query->where('created_at', 'like', date('Y-m-d') . '%')
+                        ->orWhere('created_at', '<=', date('Y-m-d'));
+                })->orderBy('created_at', 'Desc')->first();
         }
         $providers = get_providers();
         $generalService = general_service();
-        $topics = Service::orderByRaw("RAND()")->get();
+        $topics = Category::whereNull('parent_id')->get();
         $prayer_times = $this->prayTimesCal();
         $hjrri_date = $this->hjrri_date_cal();
         return view('front.home', compact('main_video', 'providers', 'generalService', 'topics', 'prayer_times', 'hjrri_date'));
     }
 
-    public function services($id) {
-
+    public function services($id)
+    {
         $provider = Provider::FindOrFail($id);
         return view('front.services', compact('provider'));
     }
 
-    public function contents($id, Request $request) {
-        $service = Service::FindOrFail($id);
-        $title = $service->title;
+    public function contents($id, Request $request)
+    {
+        //dd($id);
+        $category = Category::FindOrFail($id);
+        $services = $category->contents;
+        //$title = $service->title;
         if ($request->has('OpID')) {
             $opID = $request->OpID;
-            $contents = Post::join('contents', 'contents.id', '=', 'posts.video_id')
-                    ->where('service_id', $id)
-                    ->where('posts.operator_id', $opID)
-                    ->where('posts.active', 1)
-                    ->where('posts.show_date', '>=', date('y-m-d'))
-                    ->get();
-            
-            
-            
+            $contents = Post::join('contents', 'contents.id', '=', 'posts.content_id')
+                ->where('posts.operator_id', $opID)
+                ->where('posts.active', 1)
+                ->where('posts.published_date', '>=', date('y-m-d'))
+                ->get();
         } else {
-            $contents = Video::where('service_id', $id)->get();
+            $contents = Content::where('category_id', $id)->get();
         }
-        if ($service->type == 1) {
-            return view('front.videos', compact('contents', 'title'));
-        } elseif ($service->type == 2) {
-            return view('front.audios', compact('contents', 'title'));
-        } elseif ($service->type == 3) {
-            return view('front.images_service', compact('contents', 'title'));
-        }
+        // foreach($services as $service){
+        //     if ($service->content_type_id == 5) {
+        //         return view('front.videos', compact('contents'));
+        //     } elseif ($service->content_type_id == 4) {
+        //         return view('front.audios', compact('contents'));
+        //     } elseif ($service->content_type_id == 3) {
+        //         return view('front.videos', compact('contents'));
+        //     }elseif ($service->content_type_id == 6) {
+        //         return view('front.iframe', compact('contents'));
+        //     }else{
+        //         return view('front.text', compact('contents'));
+        //     }
+        // }
+        return view('front.videos', compact('services','contents'));
+
+
+
     }
 
-    public function view_content($id) {
+    public function view_content($id)
+    {
+        $content = Content::FindOrFail($id);
 
-        $content = Video::FindOrFail($id);
-        $title = $content->service->title;
-        $rbt = null;
         $prayer_times = $this->prayTimesCal();
         $hjrri_date = $this->hjrri_date_cal();
-        if ($content->type == 1) {
-            $rbt = Audio::where('video_id', $id)->first();
-            return view('front.play_video', compact('content', 'title', 'prayer_times', 'hjrri_date', 'rbt'));
-        } elseif ($content->type == 2) {
-            return view('front.inner_audio', compact('content', 'title', 'prayer_times', 'hjrri_date'));
-        } elseif ($content->type == 3) {
-            return view('front.inner_image', compact('content', 'title'));
-        }
+        // if ($content->type == 1) {
+        //     $rbt = Audio::where('video_id', $id)->first();
+        //     return view('front.play_video', compact('content', 'prayer_times', 'hjrri_date', 'rbt'));
+        // } elseif ($content->type == 2) {
+        //     return view('front.inner_audio', compact('content', 'prayer_times', 'hjrri_date'));
+        // } elseif ($content->type == 3) {
+        //     return view('front.inner_image', compact('content'));
+        // }
+        return view('front.play_video', compact('content', 'prayer_times', 'hjrri_date'));
     }
 
-    public function sebha() {
+    public function sebha()
+    {
 
         return view('front.sebha');
     }
 
-    public function zakah() {
+    public function zakah()
+    {
 
         return view('front.zakah');
     }
 
-    public function merath() {
+    public function merath()
+    {
 
         return view('front.merath');
     }
 
-    public function merath_calc() {
+    public function merath_calc()
+    {
 
         return view('front.merath_calc');
     }
 
     // salah time
-    public function salah_time() {
+    public function salah_time()
+    {
         $prayer_times = $this->prayTimesCal();
         $hjrri_date = $this->hjrri_date_cal();
 
         return view('front.salah_time', compact('prayer_times', 'hjrri_date'));
     }
 
-    public function prayTimesCal() {
+    public function prayTimesCal()
+    {
         $ip = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
         $new_arr[] = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $ip));
         //  echo "Latitude:".$new_arr[0]['geoplugin_latitude']." and Longitude:".$new_arr[0]['geoplugin_longitude'];
@@ -166,7 +182,8 @@ class FrontController extends Controller {
         return $prayer_times;
     }
 
-    public function hjrri_date_cal() {
+    public function hjrri_date_cal()
+    {
         // Hijri date
         $hjrri_date = array();
         include(public_path('plugins/HijriDate.php'));
@@ -186,14 +203,16 @@ class FrontController extends Controller {
 
         return $hjrri_date_object;
     }
-   
+
     // end salah time
-    public function mosque() {
+    public function mosque()
+    {
 
         return view('front.mosque');
     }
 
-    public function azan() {
+    public function azan()
+    {
 
         $providers = Provider::with('audio')->get();
         $providers = Audio::with('provider')->groupBy('provider_id')->get();
@@ -201,7 +220,8 @@ class FrontController extends Controller {
         return view('front.azan', compact('providers'));
     }
 
-    public function list_azan(Request $request) {
+    public function list_azan(Request $request)
+    {
 
         $audios = Audio::where('provider_id', $request->id)->get();
         $data = view('front.list_azan', compact('audios'))->render();
@@ -209,7 +229,8 @@ class FrontController extends Controller {
         return Response($data);
     }
 
-    public function rbts(Request $request) {
+    public function rbts(Request $request)
+    {
 
         if ($request->has('OpID')) {
             $opID = $request->OpID;
@@ -220,12 +241,13 @@ class FrontController extends Controller {
         return view('front.rbts', compact('rbts'));
     }
 
-    public function view_rbt($id) {
+    public function view_rbt($id)
+    {
 
         $rbt = Audio::FindOrFail($id);
         $prayer_times = $this->prayTimesCal();
         $hjrri_date = $this->hjrri_date_cal();
-        return view('front.inner_rbt', compact('rbt','prayer_times','hjrri_date'));
+        return view('front.inner_rbt', compact('rbt', 'prayer_times', 'hjrri_date'));
     }
 
 
@@ -508,7 +530,7 @@ class FrontController extends Controller {
         // create a log channel
         $actionName = "AddSubscriptionContractRequest";
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
+        $result_arr = (array) $result;
         $this->log($actionName, $URL, $result_arr);  // log out
 
         if ($result->operationStatusCode == 51) {
@@ -574,8 +596,4 @@ class FrontController extends Controller {
 
         return $result;
     }
-
-
-
-
 }

@@ -1,5 +1,4 @@
-@extends('front.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
 .main h6 {
     text-align: center;
@@ -25,32 +24,32 @@
 <div class="main">
     <div class="container">
         <div class="row">
-            @foreach($contents as $item)
-            @if($item->content_type_id == 5)
+            <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if($item->content_type_id == 5): ?>
             <div class="col-6">
                 <div class="video_content">
                     <div class="over"></div>
-                    <a href="{{url('view_content/'.$item->id)}}">
+                    <a href="<?php echo e(url('view_content/'.$item->id)); ?>">
                         <div class="play_icon"><i class="far fa-play-circle fa-2x"></i></div>
 
                         <div class="title_content">
-                            <img src="{{$item->image_preview}}" alt="">
+                            <img src="<?php echo e($item->image_preview); ?>" alt="">
                         </div>
                     </a>
                 </div>
-                <h6>{{$item->title}}</h6>
+                <h6><?php echo e($item->title); ?></h6>
             </div>
-            @elseif ($item->content_type_id == 3)
+            <?php elseif($item->content_type_id == 3): ?>
             <div class="col-6">
                 <div class="video_content">
-                    <a href="{{url('view_content/'.$item->id)}}">
+                    <a href="<?php echo e(url('view_content/'.$item->id)); ?>">
                         <div class="over"></div>
-                        <img src="{{$item->path}}" alt="{{$item->title}}">
+                        <img src="<?php echo e($item->path); ?>" alt="<?php echo e($item->title); ?>">
                     </a>
                 </div>
-                <h6>{{$item->title }}</h6>
+                <h6><?php echo e($item->title); ?></h6>
             </div>
-            @elseif ($item->content_type_id == 4)
+            <?php elseif($item->content_type_id == 4): ?>
             <div class="col-6">
                 <table class="table table-dark table-hover">
                     <thead>
@@ -62,13 +61,13 @@
                     <tbody>
                         <tr>
                             <td>
-                                <a href="{{url('view_content/'.$item->id)}}">
-                                    <span>{{$item->title}}</span>
+                                <a href="<?php echo e(url('view_content/'.$item->id)); ?>">
+                                    <span><?php echo e($item->title); ?></span>
                                 </a>
                             </td>
                             <td>
                                 <div class="np-play play-status">
-                                    <span class="fa fa-play" data-src="{{$item->path}}"></span>
+                                    <span class="fa fa-play" data-src="<?php echo e($item->path); ?>"></span>
                                 </div>
                                 <audio id="audio_test" controls="controls" style="display:none">
                                     <source id="audioSource" src="">
@@ -78,30 +77,33 @@
                     </tbody>
                 </table>
             </div>
-            @elseif ($item->content_type_id == 6)
+            <?php elseif($item->content_type_id == 6): ?>
             <div class="col-6">
                 <div class="video_content">
                     <div class="over"></div>
-                    <a href="{{url('view_content/'.$item->id)}}">
+                    <a href="<?php echo e(url('view_content/'.$item->id)); ?>">
                         <div class="play_icon"><i class="far fa-play-circle fa-2x"></i></div>
                         <div class="title_content">
-                            <img src="{{$item->image_preview}}" alt="">
+                            <img src="<?php echo e($item->image_preview); ?>" alt="">
                         </div>
                     </a>
                 </div>
-                <h6>{{$item->title}}</h6>
+                <h6><?php echo e($item->title); ?></h6>
             </div>
-            @else
+            <?php else: ?>
             <div class="col-6">
-                <a href="{{url('view_content/'.$item->id)}}">
-                    {!! $item->path !!}
+                <a href="<?php echo e(url('view_content/'.$item->id)); ?>">
+                    <?php echo $item->path; ?>
+
                 </a>
-                <h6>{{$item->title}}</h6>
+                <h6><?php echo e($item->title); ?></h6>
             </div>
-            @endif
-            @endforeach
+            <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
 </div>
 <!-- end main content -->
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('front.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/videos.blade.php ENDPATH**/ ?>

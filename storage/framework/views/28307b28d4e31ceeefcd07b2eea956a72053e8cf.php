@@ -1,5 +1,4 @@
-@extends('front.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     .error{
         text-align: center;
@@ -22,14 +21,14 @@
             <p>للعودة الى الصفحة الرئيسية اضغط هنا</p>
 
             <div class="btns">
-                <a class="btn wow pulse" href="{{url('index')}}" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="1.5s">الصفحة الرئيسية</a>
+                <a class="btn wow pulse" href="<?php echo e(url('index')); ?>" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="1.5s">الصفحة الرئيسية</a>
             </div>
         </div>
 
     </div>
 </div>
-@stop
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script>
 /* Start Active Menu */
 $(function() {
@@ -40,7 +39,9 @@ $(function() {
     $('#tit').html($('#tit').html()+' '+url2[url2.length - 1])
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 /* End Active Menu */
 
 
+
+<?php echo $__env->make('front.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/error.blade.php ENDPATH**/ ?>

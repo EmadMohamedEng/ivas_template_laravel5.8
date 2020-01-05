@@ -67,10 +67,10 @@ function get_static_routes()
     Route::get('merath_calc', 'FrontController@merath_calc');
     Route::get('salah_time', 'FrontController@salah_time');
     Route::get('mosque', 'FrontController@mosque');
-    Route::get('azan', 'FrontController@azan');
-    Route::get('providers/list_azan', 'FrontController@list_azan');
-    Route::get('view_rbt/{id}', 'FrontController@view_rbt');
-    Route::get('rbts', 'FrontController@rbts');
+    // Route::get('azan', 'FrontController@azan');
+    // Route::get('providers/list_azan', 'FrontController@list_azan');
+    // Route::get('view_rbt/{id}', 'FrontController@view_rbt');
+    // Route::get('rbts', 'FrontController@rbts');
 
 
 

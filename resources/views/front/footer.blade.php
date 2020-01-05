@@ -1,14 +1,15 @@
 <!-- loading -->
 <div class="loading-overlay">
     <div class="spinner">
-        {{-- <img src="{{url('assets/front/')}}/img/logo.png" alt="loading"> --}}
-        <img src="{{url('assets/front/')}}/img/ooredoo_qatar.png" alt="loading">
+        {{-- <img src="{!! DB::table('settings')->where('key','like','%Loading Image%')->first()->value !!}" alt="loading"> --}}
+        <img src="{{url('').'/'. DB::table('settings')->where('key','like','%Loading Image%')->first()->value }}"
+            alt="loading">
     </div>
 </div>
 <!-- end loading -->
 
 <style>
-    a:hover {
+a:hover {
     color: #f3e5b8;
     text-decoration: none;
 }
@@ -16,7 +17,7 @@
 
 <!-- footer -->
 <footer>
-   
+
 </footer>
 <!-- end footer -->
 
@@ -30,25 +31,25 @@
 <script src="{{url('assets/front/')}}/js/merath_calculation.js"></script>
 <script src="{{url('assets/front/')}}/js/script.js"></script>
 <script>
-        /* Start Active Menu */
-        $(function() {
-            // this will get the full URL at the address bar
-            var url = window.location.href;
-            // passes on every "a" tag 
-            $("ul li a").each(function() {		
-                // checks if its the same on the address bar
-                if (url == (this.href)) {
-					$("#home").removeClass("active");
-					//console.log('hi omar')
-                    $(this).closest("li a").addClass("active");
-                    $(this).closest(".submenu").css("display","block");
-                }
-            });
-        });
-        /* End Active Menu */
-        </script>
+/* Start Active Menu */
+$(function() {
+    // this will get the full URL at the address bar
+    var url = window.location.href;
+    // passes on every "a" tag
+    $("ul li a").each(function() {
+        // checks if its the same on the address bar
+        if (url == (this.href)) {
+            $("#home").removeClass("active");
+            //console.log('hi omar')
+            $(this).closest("li a").addClass("active");
+            $(this).closest(".submenu").css("display", "block");
+        }
+    });
+});
+/* End Active Menu */
+</script>
 
- @yield('script')
+@yield('script')
 
 </body>
 

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<?php echo e(url('assets/front/')); ?>/css/main-style.css">
 
     <!-- title -->
-    <title>islamic WebApp</title>
+    <title><?php echo DB::table('settings')->where('key','like','%Title%')->first()->value; ?></title>
     <style>
     .active{
         background: #b63b4d;
@@ -67,7 +67,7 @@
 
                 <div class="col-4 h_title">
                     <div class="page_title">
-                        <img src="<?php echo e(url('assets/front/')); ?>/img/44.jpg" alt="islamic" onclick="gotohome()">
+                        <img src="<?php echo e(url('').'/'. DB::table('settings')->where('key','like','%Header Logo%')->first()->value); ?>" alt="islamic" onclick="gotohome()">
                     </div>
                 </div>
                 <div class="col-4 h_arrow">
@@ -83,5 +83,6 @@
     <script>
         function gotohome(){
     window.location.href='<?php echo e(url("/home")); ?>' ;
-} 
-    </script><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/header.blade.php ENDPATH**/ ?>
+}
+    </script>
+<?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/header.blade.php ENDPATH**/ ?>

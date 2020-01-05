@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Mobile Meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ooredoo Qatar Services</title>
+    <title><?php echo DB::table('settings')->where('key','like','%Title%')->first()->value; ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/front/')); ?>/css/animate.css">
     <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/front/')); ?>/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo e(url('assets/front/')); ?>/css/bootstrap.min.css">

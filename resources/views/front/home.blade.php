@@ -26,10 +26,10 @@
                 <source src="{{$main_video->video}}" type="video/mp4">
             </video>  --}}
 
-            <img src="{{$main_video->service->provider->image}}" style="width:100%;height:200px" >
+            <img src="{{$main_video->image_preview}}" style="width:100%;height:200px" >
 
         </div>
-        <h6 style="    color: #f3e5b8; margin:10px;text-align:center">{{$main_video->title }}</h6>
+        <h6 style="color: #f3e5b8; margin:10px;text-align:center">{{$main_video->title}}</h6>
     </a>
 
 

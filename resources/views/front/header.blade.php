@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{url('assets/front/')}}/css/main-style.css">
 
     <!-- title -->
-    <title>islamic WebApp</title>
+    <title>{!! DB::table('settings')->where('key','like','%Title%')->first()->value !!}</title>
     <style>
     .active{
         background: #b63b4d;
@@ -83,7 +83,7 @@
 
                 <div class="col-4 h_title">
                     <div class="page_title">
-                        <img src="{{url('assets/front/')}}/img/44.jpg" alt="islamic" onclick="gotohome()">
+                        <img src="{{url('').'/'. DB::table('settings')->where('key','like','%Header Logo%')->first()->value }}" alt="islamic" onclick="gotohome()">
                     </div>
                 </div>
                 <div class="col-4 h_arrow">
@@ -99,5 +99,5 @@
     <script>
         function gotohome(){
     window.location.href='{{url("/home")}}' ;
-} 
+}
     </script>
