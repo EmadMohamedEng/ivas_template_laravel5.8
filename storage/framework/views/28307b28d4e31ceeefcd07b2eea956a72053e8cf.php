@@ -53,6 +53,5 @@ $(function() {
 });
 </script>
 <?php $__env->stopSection(); ?>
-/* End Active Menu */
 
 <?php echo $__env->make('front.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/front/error.blade.php ENDPATH**/ ?>

@@ -10,6 +10,7 @@ use App\Provider;
 use App\Category;
 use App\Audio;
 use App\Post;
+use App\Operator;
 
 use Monolog\Logger;
 use Carbon\Carbon;
@@ -92,10 +93,7 @@ class FrontController extends Controller
         //         return view('front.text', compact('contents'));
         //     }
         // }
-        return view('front.videos', compact('services','contents'));
-
-
-
+        return view('front.videos', compact('services', 'contents'));
     }
 
     public function view_content($id)
@@ -203,6 +201,30 @@ class FrontController extends Controller
 
         return $hjrri_date_object;
     }
+
+
+    public function op_id(Request $request)
+    {
+
+        if (Post::where('operator_id', $request->op_id)->exists()) {
+            $posts = Post::where('operator_id', $request->op_id)->get();
+            //dd($posts);
+            foreach ($posts as  $post) {
+                $contents[] = Content::where('id', $post->content_id)->get();
+                //dd($contents);
+            }
+            return view('front.opid', compact('contents'));
+        } elseif (Post::whereNull('operator_id', $request->op_id)) {
+            return response()->view('front.error',);
+        } else {
+            $contents = Content::all();
+            //dd($contents);
+            return view('front.opid1', compact('contents'));
+        }
+    }
+
+
+
 
     // end salah time
     public function mosque()

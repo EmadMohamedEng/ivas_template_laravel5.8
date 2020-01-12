@@ -35,7 +35,6 @@ class PostController extends Controller
       }else{
         $posts = Post::all();
       }
-
       $datatable = \DataTables::of($posts)
         ->addColumn('index', function(Post $post) {
             return '<input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{$content->id}}" class="roles" onclick="collect_selected(this)">';
@@ -71,7 +70,7 @@ class PostController extends Controller
         })
         ->escapeColumns([])
         ->make(true);
-      
+
         return $datatable;
     }
 
@@ -112,15 +111,17 @@ class PostController extends Controller
       $content = Content::findOrFail($request->content_id);
 
       foreach ($request->operator_id as  $operator_id) {
-        $operator = $content->operators()->attach([$operator_id => ['url' => url('user/content/'.$request->content_id.'?op_id='.$operator_id) ,
+        $operator = $content->operators()->attach([$operator_id => ['url' => url('view_content/'.$request->content_id.'?op_id='.$operator_id) ,
         'published_date' => $request->published_date,'active' => $request->active , 'user_id' => Auth::user()->id]]);
       }
 
       $posts = Post::where('content_id',$request->content_id)->whereIn('operator_id',$request->operator_id)->get();
-
+     //$random = md5(uniqid($posts, true));
+     $random = mt_rand(100000,999999);
+     //dd($random);
       foreach ($posts as $post) {
         Post::find($post->id)->update([
-          'url' => url('user/content/'.$request->content_id.'?op_id='.$post->operator_id.'&post_id='.$post->id)
+          'url' => url('view_content/'.$request->content_id.'?op_id='.$post->operator_id.'&post_id='.$random)
         ]);
       }
 
@@ -180,8 +181,9 @@ class PostController extends Controller
       }
       $input =$request->only('published_date','active','patch_number','content_id');
       $post = Post::findOrFail($id);
+      $random = mt_rand(100000,999999);
       $content = Content::findOrFail($request->content_id);
-      $post->update($input+['operator_id' => $request->operator_id[0] , 'url' => url('user/content/'.$request->content_id.'?op_id='.$request->operator_id[0].'&post_id='.$post->id) , 'user_id' => Auth::id()]);
+      $post->update($input+['operator_id' => $request->operator_id[0] , 'url' => url('view_content/'.$request->content_id.'?op_id='.$request->operator_id[0].'&post_id='.$random) , 'user_id' => Auth::id()]);
 
       \Session::flash('success', 'Post Update Successfully');
       return redirect('content/'.$request->content_id);

@@ -54,4 +54,3 @@ $(function() {
 });
 </script>
 @endsection
-/* End Active Menu */
