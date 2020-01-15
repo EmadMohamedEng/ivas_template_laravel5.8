@@ -11,7 +11,7 @@ use App\Category;
 use App\Audio;
 use App\Post;
 use App\Operator;
-
+use App\RbtCode;
 use Monolog\Logger;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -58,11 +58,18 @@ class FrontController extends Controller
         return view('front.home', compact('main_video', 'providers', 'generalService', 'topics', 'prayer_times', 'hjrri_date'));
     }
 
-    public function services($id)
+    public function services($id,Request $request)
     {
-        $provider = Provider::FindOrFail($id);
-        return view('front.services', compact('provider'));
+        if(RbtCode::where('provider_id', $request->rbt)->exists()){
+            $provider = Provider::FindOrFail($id);
+            $rbtCodes = RbtCode::where('provider_id', $request->rbt)->get();
+            return view('front.services_id', compact('rbtCodes','provider'));
+        }else{
+            $provider = Provider::FindOrFail($id);
+            return view('front.services', compact('provider'));
+        }
     }
+
 
     public function contents($id, Request $request)
     {
@@ -101,16 +108,20 @@ class FrontController extends Controller
         $content = Content::FindOrFail($id);
 
         $prayer_times = $this->prayTimesCal();
+        $new_pt = array();
+        $en = ['am', 'pm'];
+        $ar = ['صباحا', 'مساء'];
         $hjrri_date = $this->hjrri_date_cal();
-        // if ($content->type == 1) {
-        //     $rbt = Audio::where('video_id', $id)->first();
-        //     return view('front.play_video', compact('content', 'prayer_times', 'hjrri_date', 'rbt'));
-        // } elseif ($content->type == 2) {
-        //     return view('front.inner_audio', compact('content', 'prayer_times', 'hjrri_date'));
-        // } elseif ($content->type == 3) {
-        //     return view('front.inner_image', compact('content'));
-        // }
-        return view('front.play_video', compact('content', 'prayer_times', 'hjrri_date'));
+        foreach ($prayer_times as $key => $value) {
+            array_push($new_pt, str_replace($en, $ar, $value));
+        }
+        $rbtCodes = RbtCode::all();
+
+            foreach ($rbtCodes as  $rbtCode) {
+                $operators = Operator::where('id', $rbtCode->operator_id)->get();
+            }
+            //dd($operators);
+        return view('front.play_video', compact('content', 'new_pt', 'hjrri_date', 'prayer_times','operators'));
     }
 
     public function sebha()
@@ -168,7 +179,6 @@ class FrontController extends Controller
         $prayTime = new \PrayTime($method);
         $prayTime->timeFormat = 1;  // 12-hour format
         $times = $prayTime->getPrayerTimes($date, $latitude, $longitude, $timeZone);
-
         $prayer_times = array();
         foreach ($times as $key => $value) {
             if ($prayTime->timeNames_ar[$key] == "Sunrise" || $prayTime->timeNames_ar[$key] == "Sunset") {
@@ -205,21 +215,42 @@ class FrontController extends Controller
 
     public function op_id(Request $request)
     {
-
-        if (Post::where('operator_id', $request->op_id)->exists()) {
-            $posts = Post::where('operator_id', $request->op_id)->get();
-            //dd($posts);
-            foreach ($posts as  $post) {
-                $contents[] = Content::where('id', $post->content_id)->get();
-                //dd($contents);
+        if ($request->filled('op_id')) {
+            if (Post::where('operator_id', $request->op_id)->exists()) {
+                $posts = Post::where('operator_id', $request->op_id)->get();
+                //dd($posts);
+                foreach ($posts as  $post) {
+                    $contents[] = Content::where('id', $post->content_id)->get();
+                    //dd($contents);
+                }
+                return view('front.opid', compact('contents'));
+            } else {
+                return response()->view('front.error',);
             }
-            return view('front.opid', compact('contents'));
-        } elseif (Post::whereNull('operator_id', $request->op_id)) {
-            return response()->view('front.error',);
         } else {
             $contents = Content::all();
-            //dd($contents);
             return view('front.opid1', compact('contents'));
+        }
+    }
+
+    public function op_id_au(Request $request)
+    {
+        if ($request->filled('op_id')) {
+            if (RbtCode::where('operator_id', $request->op_id)->exists()) {
+                $rbtCodes = RbtCode::where('operator_id', $request->op_id)->get();
+                foreach ($rbtCodes as  $rbtCode) {
+                    $contents[] = Content::where('id', $rbtCode->content_id)->get();
+                }
+                return view('front.opid', compact('contents'));
+            } else {
+                return response()->view('front.error',);
+            }
+        } else {
+            $rbtCodes = RbtCode::all();
+            foreach ($rbtCodes as  $rbtCode) {
+                $contents[] = Content::where('id', $rbtCode->content_id)->get();
+            }
+            return view('front.opid', compact('contents'));
         }
     }
 

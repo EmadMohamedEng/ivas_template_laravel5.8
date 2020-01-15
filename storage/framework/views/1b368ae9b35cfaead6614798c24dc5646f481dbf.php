@@ -1,5 +1,5 @@
 <?php $__env->startSection('page_title'); ?>
- Rbt Code
+Rbt Code
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <div class="row">
@@ -18,7 +18,8 @@
                     <div class="box-content">
                         <div class="btn-toolbar pull-right">
                             <div class="btn-group">
-                                <a class="btn btn-circle show-tooltip" title="" href="<?php echo e(url('rbt/create')); ?>" data-original-title="Add new record"><i class="fa fa-plus"></i></a>
+                                <a class="btn btn-circle show-tooltip" title="" href="<?php echo e(url('rbt/create')); ?>"
+                                    data-original-title="Add new record"><i class="fa fa-plus"></i></a>
                                 <?php
                                 $table_name = "rbt_codes";
                                 // pass table name to delete all function
@@ -30,23 +31,27 @@
                         </div>
                         <br><br>
                         <div class="table-responsive">
-                            <table id="example" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                            <table id="tableexample" class="table table-striped dt-responsive" cellspacing="0"
+                                width="100%">
 
                                 <thead>
                                     <tr>
-                                        <th style="width:18px"><input type="checkbox" onclick="select_all('rbt_codes')"></th>
+                                        <th style="width:18px"><input type="checkbox" onclick="select_all('rbt_codes')">
+                                        </th>
                                         <th>content</th>
                                         <th>rbt_code</th>
                                         <th>operator code</th>
                                         <th>operator</th>
-                                        <th >Action</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php $__currentLoopData = $content->rbt_operators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="<?php echo e($value->id); ?>" class="roles" onclick="collect_selected(this)"></td>
+                                        <td><input class="select_all_template" type="checkbox" name="selected_rows[]"
+                                                value="<?php echo e($value->id); ?>" class="roles" onclick="collect_selected(this)">
+                                        </td>
                                         <td>
                                             <?php echo e($content->title); ?>
 
@@ -54,14 +59,19 @@
                                         <td><?php echo e($value->pivot->rbt_code); ?></td>
                                         <td><?php echo e($value->rbt_sms_code); ?></td>
                                         <td>
-                                          <span class="btn"><?php echo e($value->country->title); ?>-<?php echo e($value->name); ?></span>
-                                        <br>
+                                            <span class="btn"><?php echo e($value->country->title); ?>-<?php echo e($value->name); ?></span>
+                                            <br>
                                         </td>
                                         </td>
                                         <td class="visible-md visible-lg">
                                             <div class="btn-group">
-                                                <a class="btn btn-sm show-tooltip" href="<?php echo e(url("rbt/".$value->pivot->id."/edit")); ?>" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm show-tooltip btn-danger" onclick="return ConfirmDelete();" href="<?php echo e(url("rbt/".$value->pivot->id."/delete")); ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm show-tooltip"
+                                                    href="<?php echo e(url("rbt/".$value->pivot->id."/edit")); ?>" title="Edit"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm show-tooltip btn-danger"
+                                                    onclick="return ConfirmDelete();"
+                                                    href="<?php echo e(url("rbt/".$value->pivot->id."/delete")); ?>" title="Delete"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -82,11 +92,12 @@
 
 <?php $__env->startSection('script'); ?>
 <script>
-
+$('#tableexample').dataTable({
+    "pageLength": 10
+});
 
 $('#contents').addClass('active');
 $('#contents_index').addClass('active');
-
 </script>
 <?php $__env->stopSection(); ?>
 

@@ -25,7 +25,8 @@ class RbtController extends Controller
      */
     public function index()
     {
-        $contents = Content::all();
+        $contents = Content::where('content_type_id', 4)->get();
+        //dd($contents);
         return view('rbt.index', compact('contents'));
     }
 
