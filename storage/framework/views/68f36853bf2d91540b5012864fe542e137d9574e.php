@@ -26,7 +26,7 @@
         <div class="row">
             <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php if($item[0]->content_type_id == 5): ?>
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <div class="over"></div>
                     <a href="<?php echo e(url('view_content/'.$item[0]->id)); ?>">
@@ -40,7 +40,7 @@
                 <h6><?php echo e($item[0]->title); ?></h6>
             </div>
             <?php elseif($item[0]->content_type_id == 3): ?>
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <a href="<?php echo e(url('view_content/'.$item[0]->id)); ?>">
                         <div class="over"></div>
@@ -50,7 +50,7 @@
                 <h6><?php echo e($item[0]->title); ?></h6>
             </div>
             <?php elseif($item[0]->content_type_id == 4): ?>
-            <div class="col-6">
+            <div class="col-12">
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
@@ -78,7 +78,7 @@
                 </table>
             </div>
             <?php elseif($item[0]->content_type_id == 6): ?>
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <div class="over"></div>
                     <a href="<?php echo e(url('view_content/'.$item[0]->id)); ?>">
@@ -91,7 +91,7 @@
                 <h6><?php echo e($item[0]->title); ?></h6>
             </div>
             <?php else: ?>
-            <div class="col-6">
+            <div class="col-12">
                 <a href="<?php echo e(url('view_content/'.$item[0]->id)); ?>">
                     <?php echo $item[0]->path; ?>
 

@@ -2,7 +2,7 @@
 <div class="loading-overlay">
     <div class="spinner">
         
-        <img src="<?php echo e(url('').'/'. DB::table('settings')->where('key','like','%Loading Image%')->first()->value); ?>"
+        <img src="<?php echo e(url('').'/'. DB::table('settings')->where('key','like','%loading_image%')->first()->value); ?>"
             alt="loading">
     </div>
 </div>

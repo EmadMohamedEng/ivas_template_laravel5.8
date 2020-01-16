@@ -58,17 +58,26 @@ class FrontController extends Controller
         return view('front.home', compact('main_video', 'providers', 'generalService', 'topics', 'prayer_times', 'hjrri_date'));
     }
 
-    public function services($id,Request $request)
+    public function services($id, Request $request)
     {
-        if(RbtCode::where('provider_id', $request->rbt)->exists()){
-            $provider = Provider::FindOrFail($id);
-            $rbtCodes = RbtCode::where('provider_id', $request->rbt)->get();
-            return view('front.services_id', compact('rbtCodes','provider'));
-        }else{
+        if ($request->filled('rbt')) {
+            if ($request->rbt == $id) {
+                $provider = Provider::FindOrFail($id);
+                $rbtCodes = RbtCode::where('provider_id', $request->rbt)->get();
+                foreach ($rbtCodes as  $rbtCode) {
+                    $contents[] = Content::where('id', $rbtCode->content_id)->get();
+                }
+                //dd($rbtCodes);
+                return view('front.services_id', compact('contents', 'provider'));
+            } else {
+                return response()->view('front.error',);
+            }
+        } else {
             $provider = Provider::FindOrFail($id);
             return view('front.services', compact('provider'));
         }
     }
+
 
 
     public function contents($id, Request $request)
@@ -106,6 +115,7 @@ class FrontController extends Controller
     public function view_content($id)
     {
         $content = Content::FindOrFail($id);
+        $operators = "";
 
         $prayer_times = $this->prayTimesCal();
         $new_pt = array();
@@ -117,11 +127,12 @@ class FrontController extends Controller
         }
         $rbtCodes = RbtCode::all();
 
-            foreach ($rbtCodes as  $rbtCode) {
-                $operators = Operator::where('id', $rbtCode->operator_id)->get();
-            }
-            //dd($operators);
-        return view('front.play_video', compact('content', 'new_pt', 'hjrri_date', 'prayer_times','operators'));
+        foreach ($rbtCodes as  $rbtCode) {
+
+            $operators = Operator::where('id', $rbtCode->operator_id)->get();
+        }
+        //dd($operators);
+        return view('front.play_video', compact('content', 'new_pt', 'hjrri_date', 'prayer_times', 'operators'));
     }
 
     public function sebha()

@@ -19,19 +19,26 @@
     <link rel="stylesheet" href="{{url('assets/front/')}}/css/main-style.css">
 
     <!-- title -->
-    <title>{!! DB::table('settings')->where('key','like','%Title%')->first()->value !!}</title>
+    <title>{!! DB::table('settings')->where('key','like','%title%')->first()->value !!}</title>
     <style>
     .active{
         background: #b63b4d;
         color: #FFF;
     }
+    header{
+        background: {!! DB::table('settings')->where('key','like','%navbar%')->first()->value !!}
+    }
+    footer{
+        background: {!! DB::table('settings')->where('key','like','%footer%')->first()->value !!}
+    }
+
     </style>
 </head>
 
 <body>
 
     <!-- navbar -->
-    <header>
+    <header >
         <div class="container-fluid">
             <div class="row">
 
@@ -83,7 +90,7 @@
 
                 <div class="col-4 h_title">
                     <div class="page_title">
-                        <img src="{{url('').'/'. DB::table('settings')->where('key','like','%Header Logo%')->first()->value }}" alt="islamic" onclick="gotohome()">
+                        <img src="{{url('').'/'. DB::table('settings')->where('key','like','%header_logo%')->first()->value }}" alt="islamic" onclick="gotohome()">
                     </div>
                 </div>
                 <div class="col-4 h_arrow">

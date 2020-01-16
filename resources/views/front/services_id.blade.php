@@ -34,26 +34,46 @@
     }
 </style>
 <!-- main content -->
-<div class="main">
-    <div class="container">
-        <div class="title">
-            <img src="{{url($provider->image)}}" alt="{{$provider->title}}">
-            <h6>{{'الشيخ '.$provider->title}}</h6>
-        </div>
-        <div class="content">
-            <div class="row">
-                <?php $services = provider_service($provider->id); ?>
-                @foreach($services as $value)
-                <div class="col-4">
-                    <a href="{{url('list_contents/'.$value->id)}}">
-                        <img class="wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="2s" src="{{url($value->image)}}" alt="{{$value->title}}">
-                        <h6>{{$value->title}}</h6>
-                    </a>
+    <div class="main">
+        <div class="container">
+            <div class="title">
+                <img src="{{url($provider->image)}}" alt="{{$provider->title}}">
+                <h6>{{'الشيخ '.$provider->title}}</h6>
+            </div>
+            <div class="content">
+                <div class="row">
+                    @foreach($contents as $item)
+                    <div class="col-12">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>اختر</th>
+                            <th>تشغيل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{{url('view_content/'.$item[0]->id)}}">
+                                    <span>{{$item[0]->title}}</span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="np-play play-status">
+                                    <span class="fa fa-play" data-src="{{$item[0]->path}}"></span>
+                                </div>
+                                <audio id="audio_test" controls="controls" style="display:none">
+                                    <source id="audioSource" src="">
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
-</div>
 <!-- end main content -->
 @stop

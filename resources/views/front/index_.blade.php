@@ -25,13 +25,13 @@
         <div class="logo">
             {{-- <img src="{{url('assets/front/')}}/img/logo.png" alt="دليل المسلم"> --}}
 
-            <img src="{!! DB::table('settings')->where('key','like','%Home Page Logo%')->first()->value !!}" alt="Ooredo Qatar">
+            <img src="{!! DB::table('settings')->where('key','like','%home_page_logo%')->first()->value !!}" alt="Ooredo Qatar">
         </div>
         <!--<h2>دليل المسلم</h2>-->
         <a href="{{url('home')}}" class="wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="1.5s"><i class="fas fa-angle-double-right fa-2x"></i></a>
         <!--<h6>تصميم وتطوير</h6>
         <img src="{{url('assets/front/')}}/img/ivas.png" alt="ivas">-->
-        <p>{!! DB::table('settings')->where('key','like','%copy rights%')->first()->value !!}</p>
+        <p>{!! DB::table('settings')->where('key','like','%copy_rights%')->first()->value !!}</p>
     </div>
 
     <script src="{{url('assets/front/')}}/js/wow.min.js"></script>

@@ -33,27 +33,47 @@
     }
 </style>
 <!-- main content -->
-<div class="main">
-    <div class="container">
-        <div class="title">
-            <img src="<?php echo e(url($provider->image)); ?>" alt="<?php echo e($provider->title); ?>">
-            <h6><?php echo e('الشيخ '.$provider->title); ?></h6>
-        </div>
-        <div class="content">
-            <div class="row">
-                <?php $services = provider_service($provider->id); ?>
-                <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-4">
-                    <a href="<?php echo e(url('list_contents/'.$value->id)); ?>">
-                        <img class="wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="2s" src="<?php echo e(url($value->image)); ?>" alt="<?php echo e($value->title); ?>">
-                        <h6><?php echo e($value->title); ?></h6>
-                    </a>
+    <div class="main">
+        <div class="container">
+            <div class="title">
+                <img src="<?php echo e(url($provider->image)); ?>" alt="<?php echo e($provider->title); ?>">
+                <h6><?php echo e('الشيخ '.$provider->title); ?></h6>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-12">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>اختر</th>
+                            <th>تشغيل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="<?php echo e(url('view_content/'.$item[0]->id)); ?>">
+                                    <span><?php echo e($item[0]->title); ?></span>
+                                </a>
+                            </td>
+                            <td>
+                                <div class="np-play play-status">
+                                    <span class="fa fa-play" data-src="<?php echo e($item[0]->path); ?>"></span>
+                                </div>
+                                <audio id="audio_test" controls="controls" style="display:none">
+                                    <source id="audioSource" src="">
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
-</div>
 <!-- end main content -->
 <?php $__env->stopSection(); ?>
 

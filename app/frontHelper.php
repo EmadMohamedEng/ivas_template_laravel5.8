@@ -3,6 +3,7 @@
 use App\Setting;
 use App\Category;
 use App\Provider;
+use App\Content;
 
 function get_setting($key) {
     $value = '';
@@ -26,6 +27,13 @@ function provider_service($id) {
     $services = Category::where('provider_id', $id)->get();
     return $services;
 }
+
+// function provider_content($id) {
+
+//     $services = $id;
+//     $services = Content::where('provider_id', $id)->get();
+//     return $services;
+// }
 
 function general_service() {
 

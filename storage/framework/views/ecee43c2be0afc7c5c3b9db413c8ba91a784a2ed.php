@@ -25,13 +25,13 @@
         <div class="logo">
             
 
-            <img src="<?php echo DB::table('settings')->where('key','like','%Home Page Logo%')->first()->value; ?>" alt="Ooredo Qatar">
+            <img src="<?php echo DB::table('settings')->where('key','like','%home_page_logo%')->first()->value; ?>" alt="Ooredo Qatar">
         </div>
         <!--<h2>دليل المسلم</h2>-->
         <a href="<?php echo e(url('home')); ?>" class="wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="1.5s"><i class="fas fa-angle-double-right fa-2x"></i></a>
         <!--<h6>تصميم وتطوير</h6>
         <img src="<?php echo e(url('assets/front/')); ?>/img/ivas.png" alt="ivas">-->
-        <p><?php echo DB::table('settings')->where('key','like','%copy rights%')->first()->value; ?></p>
+        <p><?php echo DB::table('settings')->where('key','like','%copy_rights%')->first()->value; ?></p>
     </div>
 
     <script src="<?php echo e(url('assets/front/')); ?>/js/wow.min.js"></script>

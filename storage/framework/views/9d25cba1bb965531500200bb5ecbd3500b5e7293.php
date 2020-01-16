@@ -11,29 +11,32 @@ switch ($os) {
             $Att = ';';
         }
         break;
-    case 'iPad': $Att = '&body=';
+    case 'iPad':
+        $Att = '&body=';
         break;
-    case 'iPod': $Att = '&body=';
+    case 'iPod':
+        $Att = '&body=';
         break;
-    default : $Att = '?body=';
+    default:
+        $Att = '?body=';
         break;
-}?>
+} ?>
 <style>
-/* Always set the map height explicitly to define the size of the div
+    /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
-#map {
-    height: 55vh;
-    width: 100%;
-    border: 3px solid #f5c52a;
-}
+    #map {
+        height: 55vh;
+        width: 100%;
+        border: 3px solid #f5c52a;
+    }
 
-.gm-style .gm-style-iw {
-    text-align: right !important
-}
+    .gm-style .gm-style-iw {
+        text-align: right !important
+    }
 
-ol {
-    list-style: none
-}
+    ol {
+        list-style: none
+    }
 </style>
 
 <!-- main content -->
@@ -54,8 +57,7 @@ ol {
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -97,8 +99,7 @@ ol {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" data-toggle="modal"
-                                data-target="#exampleModal2">اقرب مسجد</button>
+                            <button class="btn" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal2">اقرب مسجد</button>
                         </div>
                     </div>
                 </div>
@@ -108,8 +109,7 @@ ol {
 
 
             <!-- Modal2 -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -124,8 +124,7 @@ ol {
                             <div id="map"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal" data-toggle="modal"
-                                data-target="#exampleModal">مواقيت الصلاة</button>
+                            <button type="button" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal">مواقيت الصلاة</button>
                         </div>
                     </div>
                 </div>
@@ -171,10 +170,11 @@ ol {
 
             <div class="btns">
                 <a class="btn" href="<?php echo e(url('list_contents/'.$content->category_id)); ?>">المزيد</a>
+                <?php if($operators && $operators != null && $operators && $operators != ""): ?>
                 <?php $__currentLoopData = $operators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $operator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <a  href="" sms="<?php echo e($operator->rbt_sms_code); ?>" body="<?php echo e($operator->rbt_ussd_code); ?>" class="operator">أشتراك</a>
+                <a href="" sms="<?php echo e($operator->rbt_sms_code); ?>" body="<?php echo e($operator->rbt_ussd_code); ?>" class="operator">أشتراك</a>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                <?php endif; ?>
             </div>
 
         </div>
@@ -210,9 +210,7 @@ ol {
             </div>
 
             <div class="video">
-                <iframe style="width: 100%" src="<?php echo e(url($content->path)); ?>" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+                <iframe style="width: 100%" src="<?php echo e(url($content->path)); ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
             <div class="btns">
@@ -244,25 +242,23 @@ ol {
 <!--====================== Modal =================== -->
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(url('assets/front/')); ?>/js/mosque.js"></script>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkPbH3-wDpLOsruf4eBsae2q3xnb6153s&libraries=places&callback=initMap&language=ar"
-    async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkPbH3-wDpLOsruf4eBsae2q3xnb6153s&libraries=places&callback=initMap&language=ar" async defer>
 </script>
 <script>
-$(document).ready(function($) {
-    var deviceAgent = navigator.userAgent.toLowerCase();
-    var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
-    var xArr = $('.operator');
-    for (var i = 0; i < xArr.length; i++) {
-        sms = xArr[i].getAttribute('sms');
-        body = xArr[i].getAttribute('body');
-        if (agentID) {
-            xArr[i].setAttribute('href', 'sms:' + sms + '&body=' + body);
-        } else {
-            xArr[i].setAttribute('href', 'sms:' + sms + '?body=' + body);
+    $(document).ready(function($) {
+        var deviceAgent = navigator.userAgent.toLowerCase();
+        var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+        var xArr = $('.operator');
+        for (var i = 0; i < xArr.length; i++) {
+            sms = xArr[i].getAttribute('sms');
+            body = xArr[i].getAttribute('body');
+            if (agentID) {
+                xArr[i].setAttribute('href', 'sms:' + sms + '&body=' + body);
+            } else {
+                xArr[i].setAttribute('href', 'sms:' + sms + '?body=' + body);
+            }
         }
-    }
-});
+    });
 </script>
 <?php $__env->stopSection(); ?>
 

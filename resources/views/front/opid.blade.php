@@ -27,7 +27,7 @@
         <div class="row">
             @foreach($contents as $item)
             @if($item[0]->content_type_id == 5)
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <div class="over"></div>
                     <a href="{{url('view_content/'.$item[0]->id)}}">
@@ -41,7 +41,7 @@
                 <h6>{{$item[0]->title}}</h6>
             </div>
             @elseif ($item[0]->content_type_id == 3)
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <a href="{{url('view_content/'.$item[0]->id)}}">
                         <div class="over"></div>
@@ -51,7 +51,7 @@
                 <h6>{{$item[0]->title }}</h6>
             </div>
             @elseif ($item[0]->content_type_id == 4)
-            <div class="col-6">
+            <div class="col-12">
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
@@ -79,7 +79,7 @@
                 </table>
             </div>
             @elseif ($item[0]->content_type_id == 6)
-            <div class="col-6">
+            <div class="col-12">
                 <div class="video_content">
                     <div class="over"></div>
                     <a href="{{url('view_content/'.$item[0]->id)}}">
@@ -92,7 +92,7 @@
                 <h6>{{$item[0]->title}}</h6>
             </div>
             @else
-            <div class="col-6">
+            <div class="col-12">
                 <a href="{{url('view_content/'.$item[0]->id)}}">
                     {!! $item[0]->path !!}
                 </a>
