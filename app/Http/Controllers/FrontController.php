@@ -70,7 +70,7 @@ class FrontController extends Controller
                 //dd($rbtCodes);
                 return view('front.services_id', compact('contents', 'provider'));
             } else {
-                return response()->view('front.error',);
+                return response()->view('front.error');
             }
         } else {
             $provider = Provider::FindOrFail($id);
@@ -236,7 +236,7 @@ class FrontController extends Controller
                 }
                 return view('front.opid', compact('contents'));
             } else {
-                return response()->view('front.error',);
+                return response()->view('front.error');
             }
         } else {
             $contents = Content::all();
@@ -254,7 +254,7 @@ class FrontController extends Controller
                 }
                 return view('front.opid', compact('contents'));
             } else {
-                return response()->view('front.error',);
+                return response()->view('front.error');
             }
         } else {
             $rbtCodes = RbtCode::all();
