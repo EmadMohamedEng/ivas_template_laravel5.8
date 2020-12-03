@@ -29,4 +29,8 @@ class HomeController extends Controller
     {
        return view('JIC.index');
     }
+    public function elfinder()
+    {
+       return view('elFinder.elfinder');
+    }
 }
