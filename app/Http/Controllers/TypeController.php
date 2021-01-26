@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Type;
-use Auth; 
+use Auth;
 use App\Http\Requests;
 use App\Http\Requests\TypeRequest;
 use App\Http\Controllers\Controller;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,7 +85,7 @@ class TypeController extends Controller
      */
     public function update(TypeRequest $request, $id)
     {
-        $oldtype = Type::findOrfail($id); 
+        $oldtype = Type::findOrfail($id);
         $newtype = $request->all();
         $oldtype->update($newtype);
         \Session::flash('success','Type Updated successfully');
@@ -95,12 +100,12 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->hasRole('super_admin')) 
+        if (Auth::user()->hasRole('super_admin'))
         {
            $type = Type::findOrfail($id);
            $type->delete();
            \Session::flash('success','Type has been Deleted Successfully');
-           return redirect('types/index'); 
+           return redirect('types/index');
         }
     }
 }

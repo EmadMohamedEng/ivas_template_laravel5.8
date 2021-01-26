@@ -16,6 +16,11 @@ use Validator;
 use Auth;
 class RbtController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *

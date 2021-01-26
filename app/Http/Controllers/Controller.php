@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\RoleRoute;
+use App\Route as RouteModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -54,5 +58,39 @@ class Controller extends BaseController
         {
             unlink($image_path) ;
         }
+    }
+
+    public function get_privilege()
+    {
+      $this->middleware(function ($request, $next) {
+
+        if(Auth::user()){
+
+          $this->userRole = Auth::user()->roles->first()->id;
+
+          if($this->userRole == 1){
+            return $next($request);
+          }
+
+          $uri = Route::current()->uri;
+          $method = strtolower(Route::current()->methods[0]);
+
+          $this->route = RouteModel::where('route', $uri)->where('method', $method)->first()->id;
+
+          $routeRole = RoleRoute::where('role_id', $this->userRole)->where('route_id', $this->route)->first();
+
+          if($routeRole){
+            return $next($request);
+          }else{
+            return redirect('/')->with('failed', 'You Dont Have The Privilege To Access This page!');
+          }
+
+        }
+        else{
+          return redirect('login');
+        }
+
+      });
+
     }
 }

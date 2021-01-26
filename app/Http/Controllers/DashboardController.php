@@ -16,6 +16,7 @@ use DB;
 
 class DashboardController extends Controller
 {
+
     protected $databases_base_path ;
     public function __construct()
     {
@@ -336,7 +337,7 @@ public function seed_manager() {
             '127.0.0.1',
             '::1'
         );
-        
+
         $tables = $request->tables;
         if($tables){
             ini_set('max_execution_time', 300);

@@ -8,14 +8,19 @@ use Validator;
 use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\RouteModel ; 
+use App\RouteModel ;
 
 class RoleController extends Controller
 {
 
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     public function index()
     {
-        
+
         # code...
         $roles = Role::all();
 
@@ -25,7 +30,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        
+
             # code...
            return view('roles.create');
     }
@@ -39,7 +44,7 @@ class RoleController extends Controller
             \Session::flash('failed','This role already exists');
             return redirect('roles');
         }
-        
+
             $validator = Validator::make($request->all(),[
                     'name' => 'required',
                     'role_priority' => 'required'
@@ -51,16 +56,16 @@ class RoleController extends Controller
             Role::create(['name' => $request->name , 'role_priority' => $request->role_priority]);
 
             return redirect('roles');
-        
+
     }
 
     public function edit($id)
     {
-        
+
             $role = Role::findOrFail($id);
 
             return view('roles.edit', compact('role'));
-        
+
     }
 
 
@@ -72,12 +77,12 @@ class RoleController extends Controller
             \Session::flash('failed','Role already exists');
             return back();
         }
-        
+
             $validator = Validator::make($request->all(),[
                     'name' => 'required',
                     'role_priority' => 'required'
                 ]);
-            
+
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
@@ -90,31 +95,31 @@ class RoleController extends Controller
             $role->update();
 
             return redirect('roles');
-        
+
     }
 
- 
+
     public function destroy($id)
     {
-        
+
             $role = Role::findOrFail($id);
 
             $role->delete();
 
             return redirect('roles');
     }
-    
+
     public function view_access($id)
     {
-        $controllers = $this->get_controllers() ; // in main controller 
-        $routes = RouteModel::all() ; 
+        $controllers = $this->get_controllers() ; // in main controller
+        $routes = RouteModel::all() ;
         $role = Role::findOrFail($id) ;
         $query = "SELECT * FROM routes JOIN role_route ON routes.id = role_route.route_id JOIN roles ON role_route.role_id = roles.id WHERE roles.id = $id ORDER BY routes.controller_name" ; // order by here to sort them as the file system sorting
-        $methods = \DB::select($query) ;  
-        return view('roles.access',compact('role','routes','controllers','methods')) ;   
+        $methods = \DB::select($query) ;
+        return view('roles.access',compact('role','routes','controllers','methods')) ;
     }
-    
-    
+
+
 }
 
 

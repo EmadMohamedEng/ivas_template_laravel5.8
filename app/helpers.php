@@ -206,3 +206,20 @@ function dynamic_routes($route_model,$found_roles)
         }) ;
     }
  }
+
+ function get_action_icons($route,$method)
+ {
+
+   // check user is login and hass role
+   $userRole = Auth::user()->roles->first()->id;
+   if($userRole){
+     // check route
+     $route = RouteModel::where('route',$route)->where('method',$method)->first();
+   }
+   if($route){
+     // chec user roles has access this route
+     $routeRole = RoleRoute::where('role_id', $userRole)->where('route_id',  $route->id)->first();
+     return $routeRole || $userRole == 1 ? 1 : 0 ;
+   }
+   return false;
+ }

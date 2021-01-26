@@ -11,6 +11,11 @@ use App\ContentType;
 use Validator;
 class ContentTypeController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *

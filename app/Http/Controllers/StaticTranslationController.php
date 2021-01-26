@@ -12,6 +12,11 @@ use Validator;
 
 class StaticTranslationController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +52,7 @@ class StaticTranslationController extends Controller
                         "key_word" => "required",
                         'translations' => 'required'
                     ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -102,7 +107,7 @@ class StaticTranslationController extends Controller
                         "key_word" => "required",
                         'translations' => 'required'
                     ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }

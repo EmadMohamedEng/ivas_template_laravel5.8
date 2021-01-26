@@ -2,147 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Route;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\RouteModel ;
 use App\Role ;
 use DB;
 use App\RoleRoute ;
 use Validator;
+
 class RouteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
-        $routes = RouteModel::all() ;
+        $routes = Route::all() ;
         return view('route.index',compact('routes')) ;
     }
-
-    public function buildroutes()
-    {
-        $roles = Role::all();
-        $role_routes = RoleRoute::all();
-        $routegroupArray = array(); // Routes which have auth ..
-        $unauthgroup = array(); // Routes which haven't auth ..
-        $roleroutes = array();
-        $unauthroutes = DB::table('routes')->whereNotIn('id', function($q){
-        $q->select('route_id')->from('role_route');
-        })->get();
-        $routes = DB::table('routes')
-            ->join('role_route', 'routes.id', '=', 'role_route.route_id')
-            ->join('roles','role_route.role_id','=','roles.id')
-            ->select('routes.*','role_route.*','roles.*')
-            ->get();
-         $total = "";
-         $isfound = false ;
-         $count = 0 ;
-
-         //Grouping Roles Based On Routes ..
-         foreach($routes as $route => $items)
-         {
-            $count = 0 ;
-            foreach($routes as $sroute => $items2)
-            {
-               if($items2->route_id == $items->route_id)
-               {
-                   $count = $count + 1 ;
-                   if($count > 1)
-                   {
-                        $total = "|".$items2->name;
-                        $items->name .= $total;
-                        unset($routes[$sroute]);
-                   }
-
-               }
-
-             }
-         }
-
-        //Getting All Roles On Array For Writing ..
-        foreach($routes as $route)
-        {
-            $roleroutes[] = $route->name;
-        }
-
-        $roleroutes = array_unique($roleroutes);
-        $singleq = "'";
-        $myfile = fopen("routes.php", "w");
-        $starttext = "<?php \n /*Generated Route File @iVAS*/ \n Mail : karimahmed181@gmail.com \n \n/*
-|--------------------------------------------------------------------------
-
-| Application Routes
-
-|--------------------------------------------------------------------------
-
-|
-
-| Here is where you can register all of the routes for an application.
-
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-
-| and give it the controller to call when that URI is requested.
-
-|
-*/\n \n";
-        fwrite($myfile, $starttext);
-
-        foreach($roleroutes as $roleroute)
-        {
-            $authtext = 'Route::group(['.$singleq.'middleware'.$singleq.'=>['.$singleq.'auth'.$singleq.','.$singleq.'role:'.$roleroute.$singleq.']],'.' function () {';
-            fwrite($myfile, $authtext);
-            $newline = "\n";
-            fwrite($myfile, $newline);
-
-            foreach($routes as $route)
-            {
-                if($roleroute == $route->name)
-                {
-                                   $conroute = 'Route::'.$route->method.'('.$singleq.$route->route.$singleq.','.$singleq.$route->controller_name.'@'.$route->function_name.$singleq.');';
-                fwrite($myfile, $conroute."\n");
-                }
-
-            }
-        $authtext = '});';
-        fwrite($myfile, $authtext."\n \n");
-
-        }
-
-        //For unauth Routes
-        foreach($unauthroutes as $unauthroute)
-        {
-            $conroute = 'Route::'.$unauthroute->method.'('.$singleq.$unauthroute->route.$singleq.','.$singleq.$unauthroute->controller_name.'@'.$unauthroute->function_name.$singleq.');';
-            $unauthgroup[] = $conroute;
-        }
-
-        if(count($unauthgroup) > 0)
-        {
-            $newline = "\n";
-            fwrite($myfile, $newline);
-
-            for($i=0;$i<count($unauthgroup);$i++)
-            {
-                $text = $unauthgroup[$i];
-                fwrite($myfile, $text."\n");
-            }
-        }
-            fclose($myfile);
-            if("routes.php")
-            {
-              header('Content-disposition: attachment; filename=routes.php');
-              header('Content-type: application/php');
-              readfile('routes.php');
-            }
-
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -164,7 +52,6 @@ class RouteController extends Controller
         $method_types = $this->form_methods; // Array from main controller
         return view('route.create',compact('method_types','roles','route','controllers','methods')) ;
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -188,7 +75,7 @@ class RouteController extends Controller
         $route['route'] = $request['route'] ;
         $route['controller_name'] = $request['controller_name'] ;
         $route['function_name'] = $request['function_name'] ;
-        $added = RouteModel::create($route) ;
+        $added = Route::create($route) ;
         if(isset($request['role']))
         {
             foreach($request['role'] as $item)
@@ -207,19 +94,20 @@ class RouteController extends Controller
     public function index_v2(Request $request)
     {
         $controllers = $this->get_controllers() ; // in main controller
-
         $controller_name = NULL ;
         $methods = NULL ;
         $selected_routes = NULL ;
 
         if(isset($request['controller_name'])&&!empty($request['controller_name']))
         {
-            $controller_name = $request['controller_name'] ;
-            $selected_routes = RouteModel::where('controller_name',$controller_name)->get() ;
-            $methods = $this->get_controllers()[$controller_name] ;
+          $controller_name = $request['controller_name'] ;
+          $selected_routes = Route::where('controller_name',$controller_name)->get() ;
+          $methods = $this->get_controllers()[$controller_name] ;
         }
         $roles = Role::all() ;
         $method_types = $this->form_methods ;
+        // dd($method_types);
+        //dd($controllers);
         return view('route.index_v2',compact('controllers','selected_routes','method_types','methods','controller_name','roles')) ;
     }
 
@@ -240,6 +128,7 @@ class RouteController extends Controller
 
     public function store_v2(Request $request)
     {
+        $request['route'] = array_values($request['route']);
         $route_size = count($request['route']);
         for($i = 0 ; $i < $route_size ; $i++)
         {
@@ -251,7 +140,7 @@ class RouteController extends Controller
                 $route['route'] = $request['route'][$i][1] ;
                 $route['method'] = $request['route'][$i][2] ;
                 $route['controller_name'] = $request['controller_name'] ;
-                $check_route = RouteModel::where('controller_name',$route['controller_name'])
+                $check_route = Route::where('controller_name',$route['controller_name'])
                 ->where('function_name',$route['function_name'])
                 ->first() ;
 
@@ -262,17 +151,18 @@ class RouteController extends Controller
                     $checker = true ;
                 }
                 else {
-                    $check_route = RouteModel::create($route) ;
+                    $check_route = Route::create($route) ;
                 }
                 $IDs = [] ;
                 $holder = [] ;
-                for($j = 3 ; $j < $route_size ; $j++ )  // 0 function name , 1 route link , 2 method type ... so from 3 to ~ these are the roles
+                $role_ids = array_values($request['route'][$i]);
+                for($j = 3 ; $j <= count($role_ids) ; $j++ )  // 0 function name , 1 route link , 2 method type ... so from 3 to ~ these are the roles
                 {
-                    if(isset($request['route'][$i][$j]))
+                    if(isset($role_ids[$j]))
                     {
                         $tmp =
                             [
-                            'role_id'  => (int) $request['route'][$i][$j],
+                            'role_id'  => (int) $role_ids[$j],
                             'route_id' => $check_route->id
                             ] ;
                         array_push($IDs,$tmp) ;
@@ -315,7 +205,7 @@ class RouteController extends Controller
     public function edit($id)
     {
         $roles = Role::all() ;
-        $route = RouteModel::findOrFail($id) ;
+        $route = Route::findOrFail($id) ;
         $controllers = $this->get_controllers() ;
         $method_types = $this->form_methods; // Array from main controller
         return view('route.create',compact('method_types','roles','route','controllers')) ;
@@ -339,7 +229,7 @@ class RouteController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $old = RouteModel::findOrFail($id) ;
+        $old = Route::findOrFail($id) ;
         $old['method'] = $request['method'] ;
         $old['route'] = $request['route'] ;
         $old['controller_name'] = $request['controller_name'] ;
@@ -357,7 +247,7 @@ class RouteController extends Controller
             }
         }
         \Session::flash('success',\Lang::get('messages.custom-messages.updated'));
-        return redirect('all_routes') ;        
+        return redirect('all_routes') ;
     }
 
     /**
@@ -368,8 +258,41 @@ class RouteController extends Controller
      */
     public function destroy($id)
     {
-        RouteModel::destroy($id) ;
+        Route::destroy($id) ;
         \Session::flash('success',\Lang::get('messages.custom-messages.deleted'));
-        return redirect('all_routes') ;        
+        return redirect('all_routes') ;
     }
+
+    public function store_routes_in_database()
+    {
+        set_time_limit(0);
+
+        $routeCollection = \Route::getRoutes();
+
+        foreach ($routeCollection as $value) {
+
+            $fullAction = $value->getAction();
+
+            if (array_key_exists('controller', $fullAction)) {
+
+                $action = class_basename($value->getAction()['controller']);
+
+                list($controller, $method) = explode('@', $action);
+
+            }
+
+            $route['method'] = $value->methods()[0];
+            $route['route'] = $value->uri();
+            $route['controller_name'] = $controller;
+            $route['function_name'] = $method;
+            $route['route_name'] = $value->getName();
+
+            if($controller == "ContractRequestController" || $controller == "ClientPaymentController"){
+              Route::create($route);
+            }
+
+          }
+          return 'done!';
+    }
+
 }
