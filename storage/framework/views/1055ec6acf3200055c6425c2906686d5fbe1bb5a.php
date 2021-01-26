@@ -1,5 +1,5 @@
 <?php $__env->startSection('page_title'); ?>
-    Delete All Manager
+    Seed Manager
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-title">
-                    <h3><i class="fa fa-table"></i>Delete All Flags</h3>
+                    <h3><i class="fa fa-table"></i> Seed Manager</h3>
                     <div class="box-tool">
                         <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
                         <a data-action="close" href="#"><i class="fa fa-times"></i></a>
@@ -20,39 +20,29 @@
                         <table class="table table-striped table-hover fill-head">
                             <thead>
                                 <tr>
-                                    <th>Controller</th> 
-                                    <th>Route</th>
+                                    <th>Table</th>                                     
                                     <th>
                                         <label class="checkbox-inline">
                                             <input type="checkbox" onchange="check_all()"/>
-                                            Add Delete All Flag
+                                            create seed files
                                         </label>
                                     </th> 
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php echo Form::open(["url"=>"delete_all","class"=>"form-horizontal"]); ?> 
-                                <?php $__currentLoopData = $routes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $route): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php echo Form::open(["url"=>"admin/seed_tables","class"=>"form-horizontal"]); ?> 
+                                <?php $__currentLoopData = $tables; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>
-                                        <?php echo e($route->controller_name); ?> 
-                                    </td>
+                                        <?php echo e($value); ?> 
+                                    </td>                                    
                                     <td>
-                                        <?php echo e($route->function_name); ?>
-
-                                    </td> 
-                                    <td>
-                                        <input class="delete_all_class" type="checkbox" name="delete_alls[<?php echo e($route->id); ?>]" 
-                                            <?php $__currentLoopData = $delete_alls; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                                <?php if($route->controller_name == $item->route_ref->controller_name && $route->route == $item->route_ref->route): ?> 
-                                                    checked 
-                                                <?php endif; ?> 
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> />
+                                        <input class="seed_class" type="checkbox" name="tables[]" value="<?php echo e($value); ?>" />
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
                                 <div class="btn-group">
-                                    <input type="submit" class="btn btn-primary btn-success" value="Save Changes">
+                                    <input type="submit" class="btn btn-primary btn-success" value="Seed Tables">
                                 </div>
                                 <br><br>
                             <?php echo Form::close(); ?>
@@ -73,12 +63,12 @@
         function check_all()
         {
             checked = !checked ; 
-            $('.delete_all_class').prop('checked',checked);
+            $('.seed_class').prop('checked',checked);
         }
     </script>
     <script>
-        $('#delete-all').addClass('active');
-        $('#delete-all-index').addClass('active');
+        $('#setting').addClass('active');
+        $('#setting-seed').addClass('active');
     </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/delete_all_flags/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/dashboard/seed_manager.blade.php ENDPATH**/ ?>
