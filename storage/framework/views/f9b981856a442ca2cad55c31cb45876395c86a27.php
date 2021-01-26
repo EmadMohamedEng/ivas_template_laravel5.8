@@ -1,8 +1,7 @@
-@extends('template')
-@section('page_title')
+<?php $__env->startSection('page_title'); ?>
 provider
-@stop
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="row">
     <div class="col-md-12">
         <div class="row">
@@ -19,7 +18,7 @@ provider
                     <div class="box-content">
                         <div class="btn-toolbar pull-right">
                             <div class="btn-group">
-                                <a class="btn btn-circle show-tooltip" title="" href="{{url('provider/create')}}"
+                                <a class="btn btn-circle show-tooltip" title="" href="<?php echo e(url('provider/create')); ?>"
                                     data-original-title="Add new record"><i class="fa fa-plus"></i></a>
                                 <?php
                                 $table_name = "providers";
@@ -44,46 +43,47 @@ provider
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($providers as $value)
+                                    <?php $__currentLoopData = $providers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><input class="select_all_template" type="checkbox" name="selected_rows[]"
-                                                value="{{$value->id}}" class="roles" onclick="collect_selected(this)">
+                                                value="<?php echo e($value->id); ?>" class="roles" onclick="collect_selected(this)">
                                         </td>
-                                        <td>{{$value->id}}</td>
+                                        <td><?php echo e($value->id); ?></td>
                                         <td>
-                                            {{$value->title}}
+                                            <?php echo e($value->title); ?>
+
                                         </td>
                                         <td>
                                             <img class=" img-circle" width="100px" height="100px"
-                                                src="{{$value->image}}" />
+                                                src="<?php echo e($value->image); ?>" />
                                         </td>
                                         <td class="visible-md visible-lg">
                                             <div class="btn-group">
                                             <a class="btn btn-sm btn-success"
-                                                href="{{url("category/create?provider_id=".$value->id."&title=".$value->title)}}" title="Add Category"><i
+                                                href="<?php echo e(url("category/create?provider_id=".$value->id."&title=".$value->title)); ?>" title="Add Category"><i
                                                     class="fa fa-plus"></i>
                                                 </a>
                                                 <a class="btn btn-sm show-tooltip"
-                                                    href='{{url("provider/$value->id/edit")}}' title="Edit"><i
+                                                    href='<?php echo e(url("provider/$value->id/edit")); ?>' title="Edit"><i
                                                         class="fa fa-edit"></i></a>
-                                                <form action="{{ url('provider/'.$value->id.'/delete')}}"
+                                                <form action="<?php echo e(url('provider/'.$value->id.'/delete')); ?>"
                                                     method="GET" style="display: initial;">
-                                                    @csrf
+                                                    <?php echo csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE" />
                                                     <button type="submit" class="btn btn-sm btn-danger"
                                                         style="height: 28px;"><i class="fa fa-trash"></i></button>
                                                 </form>
-                                                @if(count($value->categories) > 0)
+                                                <?php if(count($value->categories) > 0): ?>
                                                 <a class="btn btn-sm show-tooltip show-tooltip"
-                                                href="{{url("provider/$value->id")}}" title="category"><i
+                                                href="<?php echo e(url("provider/$value->id")); ?>" title="category"><i
                                                     class="fa fa-step-forward"></i>
                                                 </a>
-                                               @endif
+                                               <?php endif; ?>
 
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -95,11 +95,13 @@ provider
 
 </div>
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
 <script>
 $('#provider').addClass('active');
 $('#provider_index').addClass('active');
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/provider/index.blade.php ENDPATH**/ ?>
