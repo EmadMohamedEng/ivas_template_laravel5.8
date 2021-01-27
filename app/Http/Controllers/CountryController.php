@@ -10,6 +10,11 @@ use App\Country;
 use Validator;
 class CountryController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,11 @@ use App\Category;
 use Validator;
 class SubCategoryController extends Controller
 {
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     /**
      * Display a listing of the resource.
      *

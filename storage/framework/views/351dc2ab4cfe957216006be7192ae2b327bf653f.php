@@ -18,4 +18,4 @@
         </div>
     <?php endif; ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\ivas_template_laravel5.8\resources\views/dashboard/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp7\htdocs\ivas_template_laravel5.8\resources\views/dashboard/index.blade.php ENDPATH**/ ?>

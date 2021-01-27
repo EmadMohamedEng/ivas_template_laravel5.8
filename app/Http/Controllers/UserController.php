@@ -15,19 +15,24 @@ use Auth;
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+      $this->get_privilege();
+    }
+
     public function index()
-    { 
+    {
         $userdata = \Auth::user() ;
-        $userRole = $userdata->roles()->first() ; 
-        $userPiriority = 999 ; 
+        $userRole = $userdata->roles()->first() ;
+        $userPiriority = 999 ;
         if($userRole)
-            $userPiriority = $userRole->role_priority ; 
+            $userPiriority = $userRole->role_priority ;
         $users = User::join('user_has_roles','user_has_roles.user_id','=','users.id')
         ->join('roles','user_has_roles.role_id','=','roles.id')
         ->where('roles.role_priority','<=',$userPiriority)
         ->select('roles.name AS role','users.*')
-        ->get() ; 
- 
+        ->get() ;
+
         return view('users.index', compact('users'));
     }
 
@@ -40,7 +45,7 @@ class UserController extends Controller
 
 
     public function store(Request $request)
-    {        
+    {
         # code...
         $validator = Validator::make($request->all(),[
             'name' => 'required',
