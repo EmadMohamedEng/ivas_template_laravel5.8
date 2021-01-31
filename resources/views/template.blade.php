@@ -210,6 +210,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
             <div id="sidebar" class="navbar-collapse collapse">
                 <!-- BEGIN Navlist -->
                 <ul class="nav nav-list">
+                    @if (get_action_icons('users', 'get'))
                     <li id="user">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-user"></i>
@@ -224,7 +225,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </ul>
                         <!-- END Submenu -->
                     </li>
+                    @endif
 
+                    @if (get_action_icons('roles', 'get'))
                     <li id="role">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-road"></i>
@@ -242,7 +245,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </ul>
                         <!-- END Submenu -->
                     </li>
+                    @endif
 
+                    @if (get_action_icons('setting', 'get'))
                     <li id="setting">
                         <a href="#" class="dropdown-toggle">
                             <i class="fa fa-gears"></i>
@@ -261,7 +266,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </ul>
                         <!-- END Submenu -->
                     </li>
+                    @endif
 
+                    @if (get_action_icons('types/index', 'get'))
                     <ul class="nav nav-list">
                         <li id="type">
                             <a href="#" class="dropdown-toggle">
@@ -275,6 +282,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+                    @endif
+
+                    @if (get_action_icons('setting', 'get'))
                     <li id="file_manager">
                         <a href="#" class="dropdown-toggle">
                             <i class="fa fa-file"></i>
@@ -290,7 +300,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </ul>
                         <!-- END Submenu -->
                     </li>
+                    @endif
 
+                    @if (get_action_icons('setting', 'get'))
                     <li id="images">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-fullscreen"></i>
@@ -305,6 +317,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </ul>
                         <!-- END Submenu -->
                     </li>
+                    @endif
+
+                    @if (get_action_icons('static_translation', 'get'))
                     <ul class="nav nav-list">
                         <li id="static">
                             <a href="#" class="dropdown-toggle">
@@ -321,7 +336,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <!-- END Submenu -->
                         </li>
                     </ul>
+                    @endif
 
+                    @if (get_action_icons('language', 'get'))
                     <ul class="nav nav-list">
                         <li id="language">
                             <a href="#" class="dropdown-toggle">
@@ -338,7 +355,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <!-- END Submenu -->
                         </li>
                     </ul>
+                    @endif
 
+                    @if (get_action_icons('setting', 'get'))
                     <ul class="nav nav-list">
                         <li id="delete-all">
                             <a href="#" class="dropdown-toggle">
@@ -354,7 +373,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <!-- END Submenu -->
                         </li>
                     </ul>
+                    @endif
 
+                    @if (get_action_icons('country', 'get'))
                     <ul class="nav nav-list">
                         <li id="country">
                             <a href="#" class="dropdown-toggle">
@@ -370,7 +391,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+                    @endif
 
+                    @if (get_action_icons('operator', 'get'))
                     <ul class="nav nav-list">
                         <li id="operator">
                             <a href="#" class="dropdown-toggle">
@@ -386,7 +409,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+                    @endif
 
+                    @if (get_action_icons('category', 'get'))
                     <ul class="nav nav-list">
                         <li id="category">
                             <a href="#" class="dropdown-toggle">
@@ -402,7 +427,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
-
+                    @endif
                     <!-- <ul class="nav nav-list">
                         <li id="sub_category">
                             <a href="#" class="dropdown-toggle">
@@ -419,6 +444,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul> -->
 
+                    @if (get_action_icons('content_type', 'get'))
                     <?php $content_type_flag = DB::table('settings')->where('key','like','%content_type_flag%')->first(); ?>
                     @if($content_type_flag->value)
                     <ul class="nav nav-list">
@@ -437,7 +463,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
                     @endif
+                    @endif
 
+                    @if (get_action_icons('content', 'get'))
                     <ul class="nav nav-list">
                         <li id="contents">
                             <a href="#" class="dropdown-toggle">
@@ -453,8 +481,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
+                    @endif
 
-
+                    @if (get_action_icons('post', 'get'))
                     <ul class="nav nav-list">
                         <li id="post">
                             <a href="#" class="dropdown-toggle">
@@ -470,7 +499,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </ul>
                         </li>
                     </ul>
-                    {{--@endif--}}
+                    @endif
                 </ul>
                 <!-- END Navlist -->
 

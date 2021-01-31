@@ -17,15 +17,15 @@
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a class="btn btn-circle show-tooltip" title="" href="{{url('language/create')}}" data-original-title="Add new record"><i class="fa fa-plus"></i></a>
-							<?php 
-								$table_name = "languages" ; 
-								// pass table name to delete all function 
+							<?php
+								$table_name = "languages" ;
+								// pass table name to delete all function
 								// if the current route exists in delete all table flags it will appear in view
 								// else it'll not appear
 							?>
-							@include('partial.delete_all') 
+							@include('partial.delete_all')
 						</div>
-						
+
 					</div><br><br>
 					<div class="table-responsive">
 						<table id="example" class="table table-striped dt-responsive" cellspacing="0" width="100%">
@@ -47,8 +47,12 @@
 									<td>{!!$language->rtl!!}</td>
 									<td class="visible-md visible-lg">
 										<div class="btn-group">
+                                            @if (get_action_icons('language/{id}/edit', 'get'))
 											<a class="btn btn-sm show-tooltip" title="" href="{{url('language/'.$language->id.'/edit')}}" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                            @endif
+                                            @if (get_action_icons('language/{id}/delete', 'get'))
 											<a class="btn btn-sm btn-danger show-tooltip" title="" onclick="return confirm('Are you sure you want to delete this ?');" href="{{url('language/'.$language->id.'/delete')}}" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                            @endif
 										</div>
 									</td>
 								</tr>

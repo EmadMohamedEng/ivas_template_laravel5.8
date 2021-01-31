@@ -1,9 +1,10 @@
 <?php
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\RoleRoute;
 use App\DeleteAll ;
-use App\RouteModel ;
+use App\Route as RouteModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 function delete_multiselect(Request $request) // select many contract from index table and delete them
 {
@@ -62,7 +63,7 @@ Route::get('/test','DashboardController@test');
     Route::resource('static_translation','\App\Http\Controllers\StaticTranslationController');
     });
 
-    Route::group(['middleware' =>['auth',"role:super_admin"]],function(){
+    Route::group(['middleware' =>['auth']],function(){
         Route::get('routes_v2','RouteController@create_v2') ;
         Route::get('routes/index_v2','RouteController@index_v2') ;
         Route::get('get_controller_methods','RouteController@get_methods_for_selected_controller') ;
@@ -172,7 +173,7 @@ function dynamic_routes($route_model,$found_roles)
             if($i < count($route_model) - 1 )
                $roles .= "|" ;
          }
-        Route::group(['middleware' =>['auth',"role:".$roles]],
+        Route::group(['middleware' =>['auth']],
         function() use($route_model,$route_method,$route,$controller_method){
                 if($route_method=="resource")
                     Route::resource($route,$controller_method) ;
@@ -210,16 +211,19 @@ function dynamic_routes($route_model,$found_roles)
  function get_action_icons($route,$method)
  {
 
-   // check user is login and hass role
-   $userRole = Auth::user()->roles->first()->id;
-   if($userRole){
-     // check route
-     $route = RouteModel::where('route',$route)->where('method',$method)->first();
-   }
-   if($route){
-     // chec user roles has access this route
-     $routeRole = RoleRoute::where('role_id', $userRole)->where('route_id',  $route->id)->first();
-     return $routeRole || $userRole == 1 ? 1 : 0 ;
-   }
-   return false;
+    // check user is login and hass role
+    $userRole = Auth::user()->roles->first()->id;
+    if($userRole == 1){
+        return true;
+    }
+    if($userRole){
+        // check route
+        $route = RouteModel::where('route',$route)->where('method',$method)->first();
+    }
+    if($route){
+        // chec user roles has access this route
+        $routeRole = RoleRoute::where('role_id', $userRole)->where('route_id',  $route->id)->first();
+        return $routeRole || $userRole == 1 ? 1 : 0 ;
+    }
+    return false;
  }

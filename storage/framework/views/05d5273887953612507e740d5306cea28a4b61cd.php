@@ -70,8 +70,12 @@
 								</td>
 								<td class="visible-md visible-lg">
 								    <div class="btn-group">
+                                        <?php if(get_action_icons('setting/{id}/edit', 'get')): ?>
 								    	<a class="btn btn-sm show-tooltip" title="" href="<?php echo e(url('setting/'.$setting->id.'/edit')); ?>" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                        <?php endif; ?>
+                                        <?php if(get_action_icons('setting/{id}/delete', 'get')): ?>
 								        <a class="btn btn-sm btn-danger show-tooltip" title="" onclick = 'return ConfirmDelete()' href="<?php echo e(url('setting/'.$setting->id.'/delete')); ?>" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                        <?php endif; ?>
 								    </div>
 								</td>
 							</tr>

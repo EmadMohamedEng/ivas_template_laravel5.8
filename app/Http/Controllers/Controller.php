@@ -14,6 +14,20 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * userRole
+     *
+     * @var string
+     */
+    private $userRole;
+    /**
+     * route
+     *
+     * @var string
+     */
+    private $route;
+
     public $form_methods = [
                             "get"=>"GET",
                             "post"=>"POST",
@@ -67,9 +81,8 @@ class Controller extends BaseController
         if(Auth::user()){
 
           $this->userRole = Auth::user()->roles->first()->id;
-
           if($this->userRole == 1){
-            return $next($request);
+              return $next($request);
           }
 
           $uri = Route::current()->uri;

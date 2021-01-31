@@ -1,7 +1,7 @@
-<?php 
- /*Generated Route File @iVAS*/ 
- Mail : karimahmed181@gmail.com 
- 
+<?php
+ /*Generated Route File @iVAS*/
+ Mail : karimahmed181@gmail.com
+
 /*
 |--------------------------------------------------------------------------
 
@@ -19,8 +19,8 @@
 
 |
 */
- 
-Route::group(['middleware'=>['auth','role:super_admin|admin']], function () {
+
+Route::group(['middleware'=>['auth']], function () {
 Route::get('category','CategoryController@index');
 Route::get('category/create','CategoryController@create');
 Route::post('category','CategoryController@store');
@@ -72,7 +72,7 @@ Route::get('routes/create?controller_name=CategoryController&role={id}','RouteCo
 Route::get('all_routes/{id}/edit','RouteController@edit');
 Route::post('all_routes/{id}/update','RouteController@update');
 });
- 
+
 
 Route::get('setting/new','SettingController@create');
 Route::post('setting','SettingController@store');

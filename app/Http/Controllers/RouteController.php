@@ -97,7 +97,6 @@ class RouteController extends Controller
         $controller_name = NULL ;
         $methods = NULL ;
         $selected_routes = NULL ;
-
         if(isset($request['controller_name'])&&!empty($request['controller_name']))
         {
           $controller_name = $request['controller_name'] ;

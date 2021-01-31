@@ -16,7 +16,7 @@
 					<div class="btn-toolbar pull-right">
 						<div class="btn-group">
 							<a class="btn btn-circle show-tooltip" title="" href="<?php echo e(url('users/new')); ?>" data-original-title="Add new record"><i class="fa fa-plus"></i></a>
-							<?php 
+							<?php
 								$table_name = "users" ;
 							?>
 							<?php echo $__env->make('partial.delete_all', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -31,7 +31,7 @@
 								<th><?php echo app('translator')->getFromJson('messages.users.user_name'); ?></th>
 								<th><?php echo app('translator')->getFromJson('messages.users.email'); ?></th>
 								<th><?php echo app('translator')->getFromJson('messages.users.role'); ?></th>
-								<th><?php echo app('translator')->getFromJson('messages.users.phone'); ?></th> 
+								<th><?php echo app('translator')->getFromJson('messages.users.phone'); ?></th>
 								<th class="visible-md visible-lg" style="width:130px"><?php echo app('translator')->getFromJson('messages.action'); ?></th>
 							</tr>
 							</thead>
@@ -43,11 +43,15 @@
 										<td><?php echo e($user->name); ?></td>
 										<td><?php echo e($user->email); ?></td>
 										<td><?php echo e($user->role); ?></td>
-										<td><?php echo e($user->phone); ?></td> 
+										<td><?php echo e($user->phone); ?></td>
 										<td class="visible-md visible-lg">
 											<div class="btn-group">
+                                                <?php if(get_action_icons('users/{id}/edit', 'get')): ?>
 												<a class="btn btn-sm show-tooltip" title="" href="<?php echo e(url('users/'.$user->id.'/edit')); ?>" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <?php endif; ?>
+                                                <?php if(get_action_icons('users/{id}/edit', 'get')): ?>
 												<a class="btn btn-sm btn-danger show-tooltip" title="" onclick="return confirm('Are you sure you want to delete this ?');" href="<?php echo e(url('users/'.$user->id.'/delete')); ?>" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                <?php endif; ?>
 											</div>
 										</td>
 									</tr>
@@ -64,7 +68,7 @@
 
 <?php $__env->startSection('script'); ?>
 	<script>
-	var check = false ; 
+	var check = false ;
 		function select_all()
 		{
 			if(!check)
@@ -76,17 +80,17 @@
 					if($user->email!=\Auth::user()->email){
 				?>
 						collect_selected("<?php echo e($user->id); ?>") ;
-				<?php 
+				<?php
 						}
-					}	
+					}
 				?>
-				check = true ; 
+				check = true ;
 			}
 			else
 			{
 				$('.users').prop("checked",!check);
 				check = false ;
-				clear_selected() ; 
+				clear_selected() ;
 			}
 		}
 	</script>
@@ -95,4 +99,5 @@
 		$('#user-index').addClass('active');
 	</script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp7\htdocs\ivas_template_laravel5.8\resources\views/users/index.blade.php ENDPATH**/ ?>
