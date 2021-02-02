@@ -33,8 +33,8 @@
 @stop
 @section('script')
     <script>
-        $('#content').addClass('active');
-        $('#content_create').addClass('active');
+        $('#rbts').addClass('active');
+        $('#rbts-create').addClass('active');
 
         //add layer btn
         var rbt = '<div id="code" style="background-color: #f9f7f7;border-radius: 8px;box-shadow: 2px 2px 2px #e8e6e6;padding: 5px;margin:10px 0px;text-align:center">\
@@ -48,7 +48,7 @@
                   </select>\
                 </div>\
             </div>\
-            <div class="col-sm-5">\
+            <div class="col-sm-4">\
                 <label class="control-label">rbt_code <span class="text-danger">*</span></label>\
                 <div class="controls">\
                     {!! Form::number("rbt_code[]",null,["placeholder"=>"rbt_code","class"=>"form-control text-center","min"=>0 , "required"]) !!}\

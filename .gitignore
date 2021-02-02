@@ -4,6 +4,8 @@
 /storage/*.key
 /storage
 /vendor
+/storage/framework/views/*.php
+/storage/framework/sessions/*
 .env
 .env.backup
 .phpunit.result.cache

@@ -428,7 +428,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
                     @endif
-                    <!-- <ul class="nav nav-list">
+                    <ul class="nav nav-list">
                         <li id="sub_category">
                             <a href="#" class="dropdown-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -442,7 +442,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <li id="sub_category_create"><a href="{{url('sub_category/create')}}">Create Sub Category</a></li>
                             </ul>
                         </li>
-                    </ul> -->
+                    </ul>
 
                     @if (get_action_icons('content_type', 'get'))
                     <?php $content_type_flag = DB::table('settings')->where('key','like','%content_type_flag%')->first(); ?>
@@ -497,6 +497,23 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                                 <li id="post_index"><a href="{{url('post')}}">List Post </a></li>
                                 <li id="post_create"><a href="{{url('post/create')}}">Create Post</a></li>
                             </ul>
+                        </li>
+                    </ul>
+                    @endif
+                    @if (get_action_icons('rbt', 'get'))
+                    <ul class="nav nav-list">
+                        <li id="rbts">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-sound-stereo"></i>
+                                <span>Rbts</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="rbts-index"><a href="{{url('rbt')}}">List Rbts</a></li>
+                                <li id="rbts-create"><a href="{{url('rbt/create')}}">Create New Item</a></li>
+                            </ul>
+                            <!-- END Submenu -->
                         </li>
                     </ul>
                     @endif
