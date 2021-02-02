@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-  protected $fillable = ['title','image' ,'parent_id'];
+  protected $fillable = ['title','image' ,'parent_id','provider_id'];
 
   ///////////////////set image///////////////////////////////
   public function setImageAttribute($value){
@@ -34,6 +34,11 @@ class Category extends Model
   public function cat()
   {
     return $this->belongsTo('App\Category','parent_id','id');
+  }
+
+  public function provider()
+  {
+    return $this->belongsTo('App\Provider','provider_id','id');
   }
 
 }

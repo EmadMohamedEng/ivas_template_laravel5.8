@@ -1,22 +1,3 @@
-@if(isset($_REQUEST['provider_id']))
-<div class="form-group">
-    <label for="textfield5" class="col-sm-3 col-lg-2 control-label">provider<span class="text-danger">*</span></label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <select  name="provider_id" class="form-control chosen-rtl">
-            <option id="provider_{{ $_REQUEST['provider_id'] }}" value="{{ $_REQUEST['provider_id'] }}">{{ $_REQUEST['title']}}
-            </option>
-        </select>
-    </div>
-</div>
-@else
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">provider<span class="text-danger">*</span></label>
-    <div class="col-sm-9 col-lg-10 controls">
-        {!! Form::select('provider_id',$providers->pluck('title','id'),null,['class'=>'form-control chosen-rtl','required']) !!}
-    </div>
-</div>
-@endif
-
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">Title <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
@@ -29,8 +10,8 @@
     <div class="col-sm-9 col-md-8 controls">
         <div class="fileupload fileupload-new" data-provides="fileupload">
             <div class="fileupload-new img-thumbnail" style="width: 200px; height: 150px;">
-                @if($category)
-                    <img src="{{$category->image}}" alt="" />
+                @if($provider)
+                    <img src="{{$provider->image}}" alt="" />
                 @else
                     <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
                 @endif
